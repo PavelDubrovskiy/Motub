@@ -1,16 +1,16 @@
-define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, view, User) {
+define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, User) {
 	var $ = Framework7.$;
 	
 	var bindings = [
 		{
-			element: '#takePhoto',
+			element: '#takeNewPhoto',
 			event: 'click',
 			handler: takePhoto
 		},
 		{
-			element: '#unexpectedCase',
+			element: '#saveNewPhoto',
 			event: 'click',
-			handler: unexpectedCase
+			handler: saveNewPhoto
 		}
 	];
 	
@@ -30,9 +30,10 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	// Нештатная ситуация
-	function unexpectedCase() {
-		app.f7.alert("Нештатная ситуация!");
+	function saveNewPhoto() {
+		app.f7.alert("Сохраняем фото!");
 	}
+	
 	function captureSuccess(mediaFiles){
 		var i, path, len;
 	    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
@@ -40,9 +41,11 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	        
 	    }
 	}
+	
 	function captureError(error){
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
+	
 	return {
 		init: init
 	};
