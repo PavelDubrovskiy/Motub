@@ -37,7 +37,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		var i, path, len;
 	    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 	        path = mediaFiles[i].fullPath;
-	        
+	        console.log(path);
 	    }
 	}
 	function captureError(error){
