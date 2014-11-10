@@ -1,6 +1,6 @@
 define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, view, User) {
 	var $ = Framework7.$;
-	
+	var path;
 	var bindings = [
 		{
 			element: '#takePhoto',
@@ -47,32 +47,51 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		var path;
 		path = mediaFiles[0].fullPath;
-	    function onInitFs(fs) {
-		  fs.root.getFile(path, {}, function(fileEntry) {
-		    fileEntry.file(function(file) {
-		       var reader = new FileReader();
-		
-		       reader.onloadend = function(e) {
-		         var txtArea = document.createElement('textarea');
-		         txtArea.value = this.result;
-		         document.body.appendChild(txtArea);
-		       };
-		
-		       reader.readAsText(file);
-		    }, errorHandler);
-		
-		  }, errorHandler);
-		
-		}
-		window.requestFileSystem(window.TEMPORARY, 1024*1024, onInitFs, errorHandler);
+		console.log('file get like '+path);
+		window.requestFileSystem(window.TEMPORARY, 10*1024*1024, onInitFs, errorHandler);
 	}
 	
 	function captureError(error){
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
+	function onInitFs(fs) {
+	    fs.root.getFile(path, {}, function(fileEntry) {
+			fileEntry.file(function(file) {
+				var reader = new FileReader();
+				reader.onloadend = function(e) {
+					console.log(this.result);
+				};
+				reader.readAsText(file);
+			}, errorHandler);
+		}, errorHandler);
+	}
+	function errorHandler(e) {
+	  var msg = '';
 	
+	  switch (e.code) {
+	    case FileError.QUOTA_EXCEEDED_ERR:
+	      msg = 'QUOTA_EXCEEDED_ERR';
+	      break;
+	    case FileError.NOT_FOUND_ERR:
+	      msg = 'NOT_FOUND_ERR';
+	      break;
+	    case FileError.SECURITY_ERR:
+	      msg = 'SECURITY_ERR';
+	      break;
+	    case FileError.INVALID_MODIFICATION_ERR:
+	      msg = 'INVALID_MODIFICATION_ERR';
+	      break;
+	    case FileError.INVALID_STATE_ERR:
+	      msg = 'INVALID_STATE_ERR';
+	      break;
+	    default:
+	      msg = 'Unknown Error';
+	      break;
+	  };
+	
+	  console.log('Error: ' + msg);
+	}
 	return {
 		init: init
 	};
