@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icons';
-	src:url('icons.eot?blpk9d');
-	src:url('icons.eot?#iefixblpk9d') format('embedded-opentype'),
-		url('icons.woff?blpk9d') format('woff'),
-		url('icons.ttf?blpk9d') format('truetype'),
-		url('icons.svg?blpk9d#icons') format('svg');
+	src:url('icons.eot?31l8p2');
+	src:url('icons.eot?#iefix31l8p2') format('embedded-opentype'),
+		url('icons.woff?31l8p2') format('woff'),
+		url('icons.ttf?31l8p2') format('truetype'),
+		url('icons.svg?31l8p2#icons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,36 +23,39 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-android-location:before {
+.icon-hammer:before {
 	content: "\21";
 }
-.icon-arrow-right-c:before {
+.icon-android-location:before {
 	content: "\22";
 }
-.icon-alert-circled:before {
+.icon-arrow-right-c:before {
 	content: "\23";
 }
-.icon-log-in:before {
+.icon-alert-circled:before {
 	content: "\24";
 }
-.icon-log-out:before {
+.icon-log-in:before {
 	content: "\25";
 }
-.icon-checkmark-round:before {
+.icon-log-out:before {
 	content: "\26";
 }
-.icon-close-round:before {
+.icon-checkmark-round:before {
 	content: "\27";
 }
-.icon-navicon-round:before {
+.icon-close-round:before {
 	content: "\28";
 }
-.icon-camera:before {
+.icon-navicon-round:before {
 	content: "\29";
 }
-.icon-chevron-left:before {
+.icon-camera:before {
 	content: "\2a";
 }
-.icon-chevron-right:before {
+.icon-chevron-left:before {
 	content: "\2b";
+}
+.icon-chevron-right:before {
+	content: "\2c";
 }

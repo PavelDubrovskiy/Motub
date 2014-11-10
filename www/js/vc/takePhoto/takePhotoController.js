@@ -30,23 +30,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	// Нештатная ситуация
-	function unexpectedCase() {		
-		/*app.f7.modal({
-			text: 'Сделайте фотографию нештатной ситуации.',
-			buttons: [
-				{
-					text: 'Отмена'
-				},
-				{
-					text: 'Сделать снимок',
-					bold: true,
-					onClick: takePhoto
-				}
-			]
-		});*/
-		
-			
-		var buttons = [
+	function unexpectedCase() {
+		app.f7.actions([
 			{
 				text: 'Сделайте фотографию нештатной ситуации.',
 				label: true
@@ -58,22 +43,24 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			{
 				text: 'Отмена'
 			}
-		];
-		app.f7.actions(buttons);
+		]);
 	}
 	
 	function captureSuccess(mediaFiles){
 		var i, path, len, fileBlob;
 	    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 	        path = mediaFiles[i].fullPath;
+	        $('#upload').val(path);
+			console.log($('#upload'));
+			var upload=$('#upload')[0]
 	        var reader = new FileReader();
 	        reader.onload = (function(theFile) {
 				return function(e) {
 					fileBlob=e.target.result;
-					alert(fileBlob);
+					console.log(fileBlob);
 		        };
-		    })(path);
-	      	reader.readAsDataURL(path);
+		    })(upload.files[0]);
+	      	reader.readAsDataURL(upload.files[0]);
 	    }
 	}
 	
