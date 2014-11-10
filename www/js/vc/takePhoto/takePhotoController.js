@@ -72,8 +72,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 					fileBlob=e.target.result;
 					alert(fileBlob);
 		        };
-		     })(f);
-	      	reader.readAsDataURL(f);
+		    })(path);
+	      	reader.readAsDataURL(path);
 	    }
 	}
 	
