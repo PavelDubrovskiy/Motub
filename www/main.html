@@ -1,0 +1,68 @@
+<!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="left sliding">
+			<a href="#" class="link icon-only open-panel" data-panel="left">
+				<i class="icon icon-navicon-round"></i><span></span>
+			</a>
+		</div>
+		<div class="center sliding">
+			Задачи на сегодня
+		</div>
+		<div class="right sliding">
+		</div>
+	</div>
+</div>
+<!-- /НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+
+<!-- СТРАНИЦЫ -->
+<div class="pages navbar-through">
+
+	<!-- СТРАНИЦА -->
+	<div data-page="main" class="page">
+		<div class="page-content" id="mainPage">
+			<span class="preloader"></span>
+		</div>
+		
+		<!-- ШАБЛОН -->
+		<script id="mainPageTemplate" type="text/template7">
+			<div class="content-block-title">Задачи</div>
+			<div class="list-block">
+				<ul>
+					{{#each new}}
+						<li>
+							<a href="task.html" class="item-content item-link" data-id="{{this.id}}">
+								<div class="item-inner">
+									<div class="item-tx">{{this.address}}</div>
+									<div class="item-after">{{this.statusRus}}</div>
+								</div>
+							</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+			{{#if remark}}
+				<div class="content-block-title">Замечания</div>
+				<div class="list-block">
+					<ul>
+						{{#each remark}}
+							<li>
+								<a href="task.html" class="item-content item-link">
+									<div class="item-inner">
+										<div class="item-tx">{{this.address}}</div>
+										<div class="item-after">Отложена</div>
+									</div>
+								</a>
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+			{{/if}}
+		</script>
+		<!-- /ШАБЛОН -->
+		
+	</div>
+	<!-- /СТРАНИЦА -->
+	
+</div>
+<!-- /СТРАНИЦЫ -->
