@@ -4,8 +4,8 @@ define('app', ['js/router'], function(Router) {
 	
 	var f7 = new Framework7({
 		modalTitle: ' ',
-		swipePanelThreshold: 50,
-		pushState: true,
+		/*swipePanelThreshold: 50,
+		pushState: true,*/
 		animateNavBackIcon: true,
 		
 		sortable: false,
@@ -19,11 +19,13 @@ define('app', ['js/router'], function(Router) {
 	var config={
 		source:'http://test02.one-touch.ru'
 	};
+	var level='';
 	return {
 		f7: f7,
 		mainView: mainView,
 		router: Router,
-		config: config
+		config: config,
+		level: level
 	};
 });
 

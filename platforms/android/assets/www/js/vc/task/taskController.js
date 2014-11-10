@@ -23,6 +23,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 				}else{
 					order=JSON.parse(msg);
 					localStorage.setItem('order',msg);
+					if(user.igroup.path=='mon' && order.status=='new') app.level='01';
 					view.render({
 						bindings: bindings,
 						order:order

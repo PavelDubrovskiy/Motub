@@ -39,6 +39,7 @@ D:\GITHUB\Motub\platforms\android\assets\www\iphone-portrait-white.png \
 D:\GITHUB\Motub\platforms\android\assets\www\js \
 D:\GITHUB\Motub\platforms\android\assets\www\lib \
 D:\GITHUB\Motub\platforms\android\assets\www\main.html \
+D:\GITHUB\Motub\platforms\android\assets\www\photo.html \
 D:\GITHUB\Motub\platforms\android\assets\www\plugins \
 D:\GITHUB\Motub\platforms\android\assets\www\takePhoto.html \
 D:\GITHUB\Motub\platforms\android\assets\www\task.html \
@@ -127,11 +128,14 @@ D:\GITHUB\Motub\platforms\android\assets\www\js\vc \
 D:\GITHUB\Motub\platforms\android\assets\www\js\utils\common.js \
 D:\GITHUB\Motub\platforms\android\assets\www\js\utils\user.js \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\main \
+D:\GITHUB\Motub\platforms\android\assets\www\js\vc\photo \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\start \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\takePhoto \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\task \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\main\mainController.js \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\main\mainView.js \
+D:\GITHUB\Motub\platforms\android\assets\www\js\vc\photo\photoController.js \
+D:\GITHUB\Motub\platforms\android\assets\www\js\vc\photo\photoView.js \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\start\startController.js \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\start\startView.js \
 D:\GITHUB\Motub\platforms\android\assets\www\js\vc\takePhoto\takePhotoController.js \

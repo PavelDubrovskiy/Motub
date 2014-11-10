@@ -12,7 +12,7 @@ define(function() {
 		this.password = values['password'] || '';
 		this.avatar = values['avatar'] || '';
 		this.code = values['code'] || '';
-		this.fb_token = values['fb_token'] || '';
+		this.igroup = values['igroup'] || '';
 	}
 
 	User.prototype.setValues = function( formInput ) {
