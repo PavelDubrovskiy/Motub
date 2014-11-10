@@ -47,21 +47,26 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		var i, path, len, fileBlob;
-	    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-	        path = mediaFiles[i].fullPath;
-	        $('#upload').val(path);
-			console.log($('#upload'));
-			var upload=$('#upload')[0]
-	        var reader = new FileReader();
-	        reader.onload = (function(theFile) {
-				return function(e) {
-					fileBlob=e.target.result;
-					console.log(fileBlob);
-		        };
-		    })(upload.files[0]);
-	      	reader.readAsDataURL(upload.files[0]);
-	    }
+		var path;
+		path = mediaFiles[0].fullPath;
+	    function onInitFs(fs) {
+		  fs.root.getFile(path, {}, function(fileEntry) {
+		    fileEntry.file(function(file) {
+		       var reader = new FileReader();
+		
+		       reader.onloadend = function(e) {
+		         var txtArea = document.createElement('textarea');
+		         txtArea.value = this.result;
+		         document.body.appendChild(txtArea);
+		       };
+		
+		       reader.readAsText(file);
+		    }, errorHandler);
+		
+		  }, errorHandler);
+		
+		}
+		window.requestFileSystem(window.TEMPORARY, 1024*1024, onInitFs, errorHandler);
 	}
 	
 	function captureError(error){
