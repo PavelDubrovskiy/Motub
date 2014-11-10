@@ -1,6 +1,13 @@
 <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
 <div class="navbar">
 	<div class="navbar-inner">
+		<div class="left">
+		</div>
+		<div class="center">
+			УН: 19233432
+		</div>
+		<div class="right">
+		</div>
 	</div>
 </div>
 <!-- /НАВИГАЦИОННАЯ ПАНЕЛЬ -->
@@ -9,7 +16,22 @@
 <div class="pages navbar-through">
 
 	<!-- СТРАНИЦА -->
-	<div data-page="photo" class="page no-navbar">
+	<div data-page="photo" class="page">
+
+		<!-- ТУЛБАР -->
+		<div class="toolbar">
+			<div class="toolbar-inner">
+				<a id="takeNewPhoto" href="#" class="button button-fill button-red f_big m_margin">
+					<i class="icon icon-camera"></i><span>Пере&shy;съёмка</span>
+				</a>
+				
+				<a id="saveNewPhoto" href="#" class="button button-fill f_big m_margin">
+					<i class="icon icon-checkmark-round"></i><span>Сохранить</span>
+				</a>
+			</div>
+		</div>
+		<!-- /ТУЛБАР -->
+
 		<div class="page-content flex-container">
 		
 			<div class="flex-block-fix f_medium f_center">
@@ -20,27 +42,9 @@
 				</div>			
 			</div>
 			
-			<a id="takePhoto" href="#" class="flex-block m_size-1 button button-fill button-red f_big m_margin">
-				<i class="icon icon-camera"></i><span>Пере&shy;съёмка</span>
-			</a>
-			
-			<a id="unexpectedCase" href="#" class="flex-block m_size-1 button button-fill f_big m_margin">
-				<i class="icon icon-checkmark-round"></i><span>Сохранить</span>
-			</a>
-			
 		</div>				
 	</div>
 	<!-- /СТРАНИЦА -->
 	
 </div>
 <!-- /СТРАНИЦЫ -->
-
-<!-- ТУЛБАР -->
-<div class="toolbar">
-    <div class="toolbar-inner">
-        <a href="#" class="link">Link 1</a>
-        <a href="#" class="link">Link 2</a>
-        <a href="#" class="link">Link 3</a>
-    </div>
-</div>
-<!-- /ТУЛБАР -->

@@ -132,6 +132,30 @@ body{
 	padding-top: 5.5rem;
 }
 
+.toolbar + .page-content{
+	padding-bottom: 5.5rem;
+}
+
+/* $toolbar */
+.toolbar{
+	height: 5.5rem;
+}
+
+.toolbar .button{
+	width: 49%;
+	height: 4.5rem;
+	line-height: 4rem;
+	font-size: 1.4rem;
+}
+
+.toolbar .button + .button{
+	margin-left: 2%;
+}
+
+.toolbar i.icon{
+	display: inline-block;
+}
+
 /* $preloader */
 .preloader{
 	width: 2rem;
@@ -216,10 +240,22 @@ i.icon.icon-camera{
 
 
 /* $modal */
+.actions-modal-label{
+	font-size: 1.4rem;
+	padding: 2rem 10px;
+}
+
+.actions-modal-button{
+	line-height: 6rem;
+	font-size: 2rem;
+}
+
+.actions-modal-button,
 .modal-button{
 	color: #00838F;
 }
 
+.modal-button,
 .modal-text{
 	font-size: 1.5rem;
 }
@@ -443,7 +479,7 @@ img{
 /* ------ */
 /* $MEDIA */
 /* ------ */
-@media screen and (min-width: 480px) {
+/*@media screen and (min-width: 480px) {
 	html {
 		font-size: 100%;
 	}
@@ -461,4 +497,4 @@ img{
 	body.with-panel-left-reveal .panel-overlay{
 		margin-left: 400px;
 	}
-}
+}*/

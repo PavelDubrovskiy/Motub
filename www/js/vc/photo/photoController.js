@@ -31,7 +31,9 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	
 	// Нештатная ситуация
 	function saveNewPhoto() {
-		app.f7.alert("Сохраняем фото!");
+		app.f7.alert("Сохраняем фото!", function() {
+			app.mainView.loadPage('takePhoto.html');
+		});
 	}
 	
 	function captureSuccess(mediaFiles){
