@@ -51,7 +51,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		path = mediaFiles[0].localURL;
 		$('#tempImg').attr('src',path);
 		console.log('file get like '+path);
-		window.requestFileSystem(window.TEMPORARY, 10*1024*1024, onInitFs, errorHandler);
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onInitFs, errorHandler);
 	}
 	
 	function captureError(error){
