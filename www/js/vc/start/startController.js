@@ -6,6 +6,11 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 			element: '#authorizationSubmit',
 			event: 'click',
 			handler: auth			
+		},
+		{
+			element: '#exit',
+			event: 'click',
+			handler: exit			
 		}
 	];
 	
@@ -38,7 +43,10 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 			}
 		});
 	}
-	
+	function exit(){
+		localStorage.clear();
+		navigator.app.exitApp();
+	}
 	return {
 		init: init
 	};
