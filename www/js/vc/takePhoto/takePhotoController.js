@@ -50,40 +50,15 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		console.log('ver 0.6');
+		console.log('ver 0.7');
 		console.log(mediaFiles);
 		//path = mediaFiles[0].localURL;
 		currentFile=mediaFiles[0];
 		
 		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
 		
-		var win = function (r) {
-			console.log("Code = " + r.responseCode);
-			console.log("Response = " + r.response);
-			console.log("Sent = " + r.bytesSent);
-		}
-		
-		var fail = function (error) {
-			alert("An error has occurred: Code = " + error.code);
-			console.log("upload error source " + error.source);
-			console.log("upload error target " + error.target);
-		}
-		
-		
-		
-		var options = new FileUploadOptions();
-		options.fileKey = "file";
-		options.fileName = path.substr(path.lastIndexOf('/') + 1);
-		options.mimeType = "text/plain";
-		
-		var params = {};
-		params.value1 = "test";
-		params.value2 = "param";
-		options.params = params;
-		
-		var ft = new FileTransfer();
-		console.log(options);
-		ft.upload(path, encodeURI(app.config.source+"/api/upload/"), win, fail, options);
+		var ans=app.sendFile(order, path);
+		console.log(ans);
 	}
 	
 	function captureError(error){
