@@ -24,8 +24,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	// Делаем фото
 	function takePhoto() {
 	 	try{
-			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
-			navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
+			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
+			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
 		}catch(e){
 			app.mainView.loadPage('photo.html');
 		}
@@ -49,12 +49,12 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		console.log('ver 0.5');
+		console.log('ver 0.6');
 		console.log(mediaFiles);
 		//path = mediaFiles[0].localURL;
 		currentFile=mediaFiles[0];
 		//path = mediaFiles[0].fullPath;
-		$('#tempImg').attr('src',currentFile);
+		$('#tempImg').attr('src',currentFile.fullPath);
 		//console.log('file get like '+path);
 		
         //window.resolveLocalFileSystemURL(path, function(fileEntry){console.log(fileEntry);}, function(error){console.log(error.code);});
@@ -66,13 +66,17 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function onInitFs(fs) {
+		console.log('onInitFs:');
 		console.log(fs);
-	    /*fs.root.getFile(path, {}, function(fileEntry) {
+	    fs.root.getFile(currentFile, {}, function(fileEntry) {
+	    	console.log('getFile:');
+			console.log(fileEntry);
 			fileEntry.file(function(file) {
-				readDataUrl(file);
-       			readAsText(file);
+				
+				//readDataUrl(file);
+       			//readAsText(file);
 			}, errorHandler);
-		}, errorHandler);*/
+		}, errorHandler);
 	}
 	function readDataUrl(file) {
         var reader = new FileReader();
