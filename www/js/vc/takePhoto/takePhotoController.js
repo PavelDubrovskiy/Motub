@@ -1,5 +1,6 @@
 define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, view, User) {
 	var $ = Framework7.$;
+	var user=new User();
 	var path;
 	var currentFile;
 	var order=JSON.parse(localStorage.getItem('order'));
@@ -57,7 +58,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		
 		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
 		
-		var ans=app.sendFile(order, path);
+		var ans=app.sendFile(order, path, app.level);
 		console.log(ans);
 	}
 	

@@ -19,19 +19,40 @@ define('app', ['js/router'], function(Router) {
 	var config={
 		source:'http://test02.one-touch.ru'
 	};
-	var sendFile=function(order, path){
+	var sendFile=function(order, path, level){
+		//todoList
+		/*
+		Добавить файл для отправки в storage
+		var filesForSend=localStorage.getItem('filesForSend');
+		if(filesForSend){
+			var filesForSend={}
+			localStorage.setItem('order',msg);
+		}
+		JSON.parse(msg);
+		*/
+			
 		var win = function (r) {
+			//todoList
+			/*
+			Убрать файл для отправки в storage
+			var filesForSend=localStorage.getItem('filesForSend');
+			if(filesForSend){
+				var filesForSend={}
+				localStorage.setItem('order',msg);
+			}
+			JSON.parse(msg);
+			*/
+		
+		
 			//console.log("Code = " + r.responseCode);
-			//console.log("Response = " + r.response);
+			console.log("Response = " + r.response);
 			//console.log("Sent = " + r.bytesSent);
-			return true;
 		}
 		
 		var fail = function (error) {
 			//alert("An error has occurred: Code = " + error.code);
 			console.log("upload error source " + error.source);
 			console.log("upload error target " + error.target);
-			return false;
 		}
 		
 		var options = new FileUploadOptions();
@@ -40,14 +61,14 @@ define('app', ['js/router'], function(Router) {
 		options.mimeType = "image/jpg";
 		
 		var params = {};
-		params.value = level;
+		params.level = level;
 		params.order = order.id;
-		params.name = order.fileName;
+		params.name = order.fileName+level;
 		options.params = params;
 		
 		var ft = new FileTransfer();
 		console.log(options);
-		return ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
+		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
 	
 	return {

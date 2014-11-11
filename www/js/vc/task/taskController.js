@@ -53,6 +53,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	
 	// Переход к началу задания
 	function taskStart() {
+		console.log(user);
 		app.mainView.loadPage('takePhoto.html');
 	}
 	
