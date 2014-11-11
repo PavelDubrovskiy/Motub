@@ -1,15 +1,7 @@
-define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, view, User) {
-	var $ = Framework7.$;
-	var path;
-	var currentFile;
+define(["app","js/vc/success/successView"], function(app, view) {
 	var bindings = [
 		{
-			element: '#takePhoto',
-			event: 'click',
-			handler: takePhoto
-		},
-		{
-			element: '#unexpectedCase',
+			element: '.unexpectedCase',
 			event: 'click',
 			handler: unexpectedCase
 		}
@@ -24,8 +16,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	// Делаем фото
 	function takePhoto() {
 	 	try{
-			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
-			navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
+			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 		}catch(e){
 			app.mainView.loadPage('photo.html');
 		}
@@ -52,7 +43,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		console.log('ver 0.4');
 		console.log(mediaFiles);
 		path = mediaFiles[0].localURL;
-		currentFile=mediaFiles[0];
 		//path = mediaFiles[0].fullPath;
 		$('#tempImg').attr('src',path);
 		console.log('file get like '+path);
@@ -92,6 +82,10 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function errorHandler(e) {
 		console.log(e.target.error.code);
 	}
+	return {
+		init: init
+	};
+	
 	return {
 		init: init
 	};
