@@ -47,7 +47,7 @@ define('app', ['js/router'], function(Router) {
 		
 		var ft = new FileTransfer();
 		console.log(options);
-		return ft.upload(path, encodeURI(app.config.source+"/api/upload/"), win, fail, options);
+		return ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
 	
 	return {
