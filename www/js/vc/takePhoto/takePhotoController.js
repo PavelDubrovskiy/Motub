@@ -47,18 +47,14 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		console.log('ver 0.3');
+		console.log('ver 0.4');
 		console.log(mediaFiles);
-		//path = mediaFiles[0].localURL;
-		path = mediaFiles[0].fullPath;
+		path = mediaFiles[0].localURL;
+		//path = mediaFiles[0].fullPath;
 		$('#tempImg').attr('src',path);
 		console.log('file get like '+path);
-		console.log('requestFileSystem');
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onInitFs, errorHandler);
-		console.log('resolveLocalFileSystemURI');
-        window.resolveLocalFileSystemURI(path, function(fileEntry){console.log(fileEntry.name);}, function(error){console.log(error.code);});
-        console.log('resolveLocalFileSystemURL');
-        window.resolveLocalFileSystemURL(path, function(fileEntry){console.log(fileEntry.name);}, function(error){console.log(error.code);});
+        window.resolveLocalFileSystemURL(path, function(fileEntry){console.log(fileEntry);}, function(error){console.log(error.code);});
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onInitFs, errorHandler);
 	}
 	
 	function captureError(error){
