@@ -49,15 +49,15 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		console.log('ver 0.4');
+		console.log('ver 0.5');
 		console.log(mediaFiles);
-		path = mediaFiles[0].localURL;
+		//path = mediaFiles[0].localURL;
 		currentFile=mediaFiles[0];
 		//path = mediaFiles[0].fullPath;
-		$('#tempImg').attr('src',path);
-		console.log('file get like '+path);
+		$('#tempImg').attr('src',currentFile);
+		//console.log('file get like '+path);
 		
-        window.resolveLocalFileSystemURL(path, function(fileEntry){console.log(fileEntry);}, function(error){console.log(error.code);});
+        //window.resolveLocalFileSystemURL(path, function(fileEntry){console.log(fileEntry);}, function(error){console.log(error.code);});
         
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onInitFs, errorHandler);
 	}
@@ -66,12 +66,13 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function onInitFs(fs) {
-	    fs.root.getFile(path, {}, function(fileEntry) {
+		console.log(fs);
+	    /*fs.root.getFile(path, {}, function(fileEntry) {
 			fileEntry.file(function(file) {
 				readDataUrl(file);
        			readAsText(file);
 			}, errorHandler);
-		}, errorHandler);
+		}, errorHandler);*/
 	}
 	function readDataUrl(file) {
         var reader = new FileReader();
