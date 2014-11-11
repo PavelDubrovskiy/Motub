@@ -47,6 +47,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
+		console.log('ver 0.1');
 		console.log(mediaFiles);
 		//path = mediaFiles[0].localURL;
 		path = mediaFiles[0].fullPath;
