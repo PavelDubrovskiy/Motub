@@ -14,12 +14,12 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	function init(query) {
 		$.ajax({
 			type: "POST",
-			async: false,
+			async: true,
 			url: app.config.source+"/api/getOrders/",
 			data: 'code='+user.code,
 			success: function(msg){
 				if(msg=='empty'){
-					app.f7.alert('На сегодня задач нет', "Внимание!");
+					$('#mainPage').html('<div class="b_task_none">На&nbsp;сегодня задач&nbsp;нет</div>');
 				}else if(msg==''){
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{

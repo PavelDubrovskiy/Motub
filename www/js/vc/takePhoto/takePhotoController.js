@@ -48,7 +48,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	
 	function captureSuccess(mediaFiles){
 		console.log(mediaFiles);
-		path = mediaFiles[0].localURL;
+		//path = mediaFiles[0].localURL;
+		path = mediaFiles[0].fullPath;
 		$('#tempImg').attr('src',path);
 		console.log('file get like '+path);
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onInitFs, errorHandler);
@@ -61,16 +62,29 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function onInitFs(fs) {
 	    fs.root.getFile(path, {}, function(fileEntry) {
 			fileEntry.file(function(file) {
-				var reader = new FileReader();
-				reader.onloadend = function(e) {
-					console.log(this.result);
-				};
-				reader.readAsText(file);
+				readDataUrl(file);
+       			readAsText(file);
 			}, errorHandler);
 		}, errorHandler);
 	}
+	function readDataUrl(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+            console.log("Read as data URL");
+            console.log(evt.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+    function readAsText(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+            console.log("Read as text");
+            console.log(evt.target.result);
+        };
+        reader.readAsText(file);
+    }
 	function errorHandler(e) {
-		console.log(e);
+		console.log(e.code);
 	}
 	return {
 		init: init

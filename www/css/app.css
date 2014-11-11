@@ -192,7 +192,7 @@ i.icon.icon-camera{
 }
 
 .f_big{
-	font-size: 2rem;
+	font-size: 1.85rem;
 	line-height: 1.125;
 }
 
@@ -453,6 +453,13 @@ img{
 
 .b_task_next{
 	font-size: 1.6rem;
+}
+
+.b_task_none{
+	font-size: 2rem;
+	padding: 2rem 15px;
+	text-align: center;
+	color: #999;
 }
 
 /* $b_img */

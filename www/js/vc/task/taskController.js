@@ -14,7 +14,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 		currentOrder=localStorage.getItem('currentOrder');
 		$.ajax({
 			type: "POST",
-			async: false,
+			async: true,
 			url: app.config.source+"/api/getOrder/",
 			data: 'id='+currentOrder+'&code='+user.code,
 			success: function(msg){

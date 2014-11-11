@@ -1,10 +1,11 @@
 define(["js/utils/common"], function(utils) {
 	var $ = Framework7.$;
+	var template = $('#mainPageTemplate').html();
+	var compiledTemplate = Template7.compile(template);
+		
 	function render(params) {
-		var template = $('#mainPageTemplate').html();
-		var compiledTemplate = Template7.compile(template);
 		console.log(params.orders);
-		html=compiledTemplate(params.orders);
+		html = compiledTemplate(params.orders);
 		$('#mainPage').html(html);
 		utils.bindEvents(params.bindings);
 	}
