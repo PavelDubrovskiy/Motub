@@ -2,6 +2,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	var $ = Framework7.$;
 	var path;
 	var currentFile;
+	var order=JSON.parse(localStorage.getItem('order'));
 	var bindings = [
 		{
 			element: '#takePhoto',
@@ -53,49 +54,40 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		console.log(mediaFiles);
 		//path = mediaFiles[0].localURL;
 		currentFile=mediaFiles[0];
-		//path = mediaFiles[0].fullPath;
-		$('#tempImg').attr('src',currentFile.fullPath);
-		//console.log('file get like '+path);
 		
-        //window.resolveLocalFileSystemURL(path, function(fileEntry){console.log(fileEntry);}, function(error){console.log(error.code);});
-        
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onInitFs, errorHandler);
+		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
+		
+		var win = function (r) {
+			console.log("Code = " + r.responseCode);
+			console.log("Response = " + r.response);
+			console.log("Sent = " + r.bytesSent);
+		}
+		
+		var fail = function (error) {
+			alert("An error has occurred: Code = " + error.code);
+			console.log("upload error source " + error.source);
+			console.log("upload error target " + error.target);
+		}
+		
+		
+		
+		var options = new FileUploadOptions();
+		options.fileKey = "file";
+		options.fileName = path.substr(path.lastIndexOf('/') + 1);
+		options.mimeType = "text/plain";
+		
+		var params = {};
+		params.value1 = "test";
+		params.value2 = "param";
+		options.params = params;
+		
+		var ft = new FileTransfer();
+		console.log(options);
+		ft.upload(path, encodeURI(app.config.source+"/api/upload/"), win, fail, options);
 	}
 	
 	function captureError(error){
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
-	}
-	function onInitFs(fs) {
-		console.log('onInitFs:');
-		console.log(fs);
-	    fs.root.getFile(currentFile, {}, function(fileEntry) {
-	    	console.log('getFile:');
-			console.log(fileEntry);
-			fileEntry.file(function(file) {
-				
-				//readDataUrl(file);
-       			//readAsText(file);
-			}, errorHandler);
-		}, errorHandler);
-	}
-	function readDataUrl(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            console.log("Read as data URL");
-            console.log(evt.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-    function readAsText(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            console.log("Read as text");
-            console.log(evt.target.result);
-        };
-        reader.readAsText(file);
-    }
-	function errorHandler(e) {
-		console.log(e.target.error.code);
 	}
 	return {
 		init: init
