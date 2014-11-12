@@ -58,8 +58,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		
 		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
 		
-		var ans=app.sendFile(order, path, app.level);
-		console.log(ans);
+		app.sendFile(order, path, app.level);
 	}
 	
 	function captureError(error){

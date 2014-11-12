@@ -54,6 +54,9 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	// Переход к началу задания
 	function taskStart() {
 		console.log(user);
+		if(user.igroup.path=='mon' && app.level=='00'){
+			app.level='01';
+		}
 		app.mainView.loadPage('takePhoto.html');
 	}
 	

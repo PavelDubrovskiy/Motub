@@ -1,7 +1,7 @@
 define('app', ['js/router'], function(Router) {
 	Router.init();
 	var $ = Framework7.$;
-	var level='';
+	var level='00';
 	var f7 = new Framework7({
 		modalTitle: ' ',
 		/*swipePanelThreshold: 50,
