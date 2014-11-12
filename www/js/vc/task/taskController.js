@@ -18,6 +18,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 			url: app.config.source+"/api/getOrder/",
 			data: 'id='+currentOrder+'&code='+user.code,
 			success: function(msg){
+				console.log(msg);
 				if(msg=='' || msg=='error'){
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{

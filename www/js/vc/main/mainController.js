@@ -18,6 +18,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 			url: app.config.source+"/api/getOrders/",
 			data: 'code='+user.code,
 			success: function(msg){
+				console.log(msg);
 				if(msg=='empty'){
 					$('#mainPage').html('<div class="b_task_none">На&nbsp;сегодня задач&nbsp;нет</div>');
 				}else if(msg==''){

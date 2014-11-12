@@ -34,6 +34,7 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 			url: app.config.source+"/api/login/",
 			data: formInput,
 			success: function(msg){
+				console.log(msg);
 				if(msg!='error'){
 					user.setValues(JSON.parse(msg));
 					app.mainView.loadPage('main.html');
