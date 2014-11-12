@@ -242,8 +242,9 @@ i.icon.icon-camera{
 
 /* $modal */
 .actions-modal-label{
-	font-size: 1.4rem;
+	font-size: 1.8rem;
 	padding: 2rem 10px;
+	color: #333;
 }
 
 .actions-modal-button{
@@ -355,6 +356,14 @@ i.icon.icon-camera{
 		margin-left: 2%;
 	}
 
+	.flex-block p,
+	.flex-block-fix p{
+		margin: 0 0 1rem;
+	}
+		.flex-block p:last-child,
+		.flex-block-fix p:last-child{
+			margin: 0;
+		}
 
 
 /* ------- */

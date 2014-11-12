@@ -15,12 +15,27 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 	];
 	
 	function init() {
-		if(user.id!=''){
-			$('.p_start_buttons').hide();
-			app.mainView.loadPage('main.html');
-		}else{
-			$('#authorizationForm').show();
-		}
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: app.config.source+"/api/getSettings/",
+			success: function(msg){
+				if(msg!=''){
+					app.settings=JSON.parse(msg);
+					if(user.id!=''){
+						$('.p_start_buttons').hide();
+						app.mainView.loadPage('main.html');
+					}else{
+						$('#authorizationForm').show();
+					}
+				}else{
+					app.f7.alert('Нет подключения к интернету или сервер не отвечает', "Ошибка");
+				}
+			},
+			error: function(error){
+				app.f7.alert('Нет подключения к интернету или сервер не отвечает', "Ошибка");
+			}
+		});
 		view.render({
 			bindings: bindings
 		});
