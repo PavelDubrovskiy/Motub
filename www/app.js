@@ -1,7 +1,12 @@
 define('app', ['js/router'], function(Router) {
 	Router.init();
 	var $ = Framework7.$;
-	var level='00';
+	
+	//todo
+	/*if(localStorage.getItem('order')==''){
+		localStorage.setItem('level','00');
+	}*/
+	localStorage.setItem('level','00');
 	var f7 = new Framework7({
 		modalTitle: ' ',
 		/*swipePanelThreshold: 50,
@@ -70,14 +75,28 @@ define('app', ['js/router'], function(Router) {
 		console.log(options);
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
-	
+	var closeOrder=function(status){
+		var order=JSON.parse(localStorage.getItem('order'));
+		var user=JSON.parse(localStorage.getItem('User'));
+		localStorage.setItem('level','00');
+		localStorage.removeItem('order');
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: config.source+"/api/closeOrder/",
+			data: 'id='+order.id+'&code='+user.code+'&status='+status,
+			success: function(msg){
+
+			}
+		});
+	}
 	return {
 		f7: f7,
 		mainView: mainView,
 		router: Router,
 		config: config,
-		level: level,
-		sendFile: sendFile
+		sendFile: sendFile,
+		closeOrder: closeOrder
 	};
 });
 

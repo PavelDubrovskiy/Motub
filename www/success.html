@@ -1,12 +1,11 @@
 <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
 <div class="navbar">
 	<div class="navbar-inner">
-		<div class="left">
+		<div class="left sliding">
 		</div>
-		<div class="center">
-			УН: 19233432
+		<div class="center sliding" id="navigationNameSuccess">
 		</div>
-		<div class="right">
+		<div class="right sliding">
 		</div>
 	</div>
 </div>
@@ -19,10 +18,10 @@
 	<div data-page="success" class="page">
 		<div class="page-content flex-container">
 		
-			<div class="flex-block m_size-2 f_medium f_center">Работы по задаче завершены</div>
+			<div class="flex-block m_size-2 f_medium f_center" id="pageDescriptionSuccess"></div>
 			
-			<a id="successSubmit" href="main.html" class="flex-block m_size-8 button button-fill f_big m_margin">
-				<i class="icon icon-checkmark-round"></i><span>Перейти к списку задач</span>
+			<a id="successSubmit" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
+				<i class="icon icon-checkmark-round"></i><span id="successSubmitText"></span>
 			</a>
 			
 			<a id="unexpectedCase" href="#" class="flex-block m_size-8 button button-fill button-red f_big m_margin">

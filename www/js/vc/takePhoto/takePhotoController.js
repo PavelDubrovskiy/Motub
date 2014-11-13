@@ -3,7 +3,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	var user=new User();
 	var path;
 	var currentFile;
-	var order=JSON.parse(localStorage.getItem('order'));
+	var order;
 	var bindings = [
 		{
 			element: '#takePhoto',
@@ -18,8 +18,9 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	];
 	
 	function init(query) {
-		$('#navigationName').text('УН: '+order.uid+' level:'+app.level);
-		$('#pageDescription').html(app.settings.description[app.level]);
+		order=JSON.parse(localStorage.getItem('order'));
+		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
+		$('#pageDescription').html(app.settings.description[localStorage.getItem('level')]);
 		view.render({
 			bindings: bindings
 		});
@@ -36,11 +37,11 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	function takePhoto16() {
 	 	try{
-	 		app.level='16';
+	 		localStorage.setItem('level','16');
 			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
 		}catch(e){
-			app.level='00';
+			localStorage.setItem('level','00');
 			app.mainView.loadPage('main.html');
 		}
 	}
@@ -60,10 +61,11 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			}
 		]);
 	}
+	
 	function captureSuccess(mediaFiles){
 		currentFile=mediaFiles[0];
 		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
-		app.sendFile(order, path, app.level);
+		app.sendFile(order, path, localStorage.getItem('level'));
 		logicController();
 	}
 	function captureError(error){
@@ -71,23 +73,23 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	// Управлятор фотками
 	function logicController(){
-		if(app.level=='01'){
-	 		app.level='02';
-	 		app.mainView.loadPage('reloadPage.html');
-	 	}else if(app.level=='02'){
-	 		app.level='03';
-	 		app.mainView.loadPage('reloadPage.html');
-	 	}else if(app.level=='03'){
-	 		app.level='04';
-	 		app.mainView.loadPage('reloadPage.html');
-	 	}else if(app.level=='04'){
-	 		app.level='05';
-	 		app.mainView.loadPage('reloadPage.html');
-	 	}else if(app.level=='05'){
-	 		app.level='06';
+		if(localStorage.getItem('level')=='01'){
+			localStorage.setItem('level','02');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='02'){
+	 		localStorage.setItem('level','03');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='03'){
+	 		localStorage.setItem('level','04');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='04'){
+	 		localStorage.setItem('level','05');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='05'){
+	 		localStorage.setItem('level','06');
 	 		app.mainView.loadPage('question.html');
-	 	}else if(app.level=='16'){
-	 		app.level='00';
+	 	}else if(localStorage.getItem('level')=='16'){
+	 		localStorage.setItem('level','00');
 	 		app.mainView.loadPage('main.html');
 	 	}
 	}

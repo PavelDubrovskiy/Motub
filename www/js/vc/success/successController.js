@@ -1,4 +1,6 @@
 define(["app","js/vc/success/successView"], function(app, view) {
+	var $ = Framework7.$;
+	var order;
 	var bindings = [
 		{
 			element: '.unexpectedCase',
@@ -8,6 +10,20 @@ define(["app","js/vc/success/successView"], function(app, view) {
 	];
 	
 	function init(query) {
+		order=JSON.parse(localStorage.getItem('order'));
+		$('#navigationNameSuccess').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
+		$('#pageDescriptionSuccess').html(app.settings.description[localStorage.getItem('level')]);
+		if(localStorage.getItem('level')=='06_01'){
+			app.closeOrder();
+			$('#successSubmit').click(function(){app.mainView.loadPage('task.html');});
+			$('#successSubmitText').text('Перейти к заданию');
+			$('#unexpectedCase').hide();
+		}else{
+			app.closeOrder();
+			$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
+			$('#navigationNameSuccess').text('Перейти к списку задач');
+			$('#unexpectedCase').hide();
+		}
 		view.render({
 			bindings: bindings
 		});
@@ -31,7 +47,7 @@ define(["app","js/vc/success/successView"], function(app, view) {
 			},
 			{
 				text: 'Сделать снимок',
-				onClick: takePhoto
+				onClick: takePhoto16
 			},
 			{
 				text: 'Отмена'
@@ -40,47 +56,13 @@ define(["app","js/vc/success/successView"], function(app, view) {
 	}
 	
 	function captureSuccess(mediaFiles){
-		console.log('ver 0.4');
-		console.log(mediaFiles);
-		path = mediaFiles[0].localURL;
-		//path = mediaFiles[0].fullPath;
-		$('#tempImg').attr('src',path);
-		console.log('file get like '+path);
-		
-        window.resolveLocalFileSystemURL(path, function(fileEntry){console.log(fileEntry);}, function(error){console.log(error.code);});
-        
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onInitFs, errorHandler);
+		currentFile=mediaFiles[0];
+		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
+		app.sendFile(order, path, localStorage.getItem('level'));
 	}
 	
 	function captureError(error){
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
-	}
-	function onInitFs(fs) {
-	    fs.root.getFile(path, {}, function(fileEntry) {
-			fileEntry.file(function(file) {
-				readDataUrl(file);
-       			readAsText(file);
-			}, errorHandler);
-		}, errorHandler);
-	}
-	function readDataUrl(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            console.log("Read as data URL");
-            console.log(evt.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-    function readAsText(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            console.log("Read as text");
-            console.log(evt.target.result);
-        };
-        reader.readAsText(file);
-    }
-	function errorHandler(e) {
-		console.log(e.target.error.code);
 	}
 	return {
 		init: init

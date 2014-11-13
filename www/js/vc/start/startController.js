@@ -29,11 +29,11 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 						$('#authorizationForm').show();
 					}
 				}else{
-					app.f7.alert('Нет подключения к интернету или сервер не отвечает', "Ошибка");
+					app.f7.alert('Нет подключения к&nbsp;интернету или&nbsp;сервер не&nbsp;отвечает', "Ошибка!");
 				}
 			},
 			error: function(error){
-				app.f7.alert('Нет подключения к интернету или сервер не отвечает', "Ошибка");
+				app.f7.alert('Нет подключения к&nbsp;интернету или&nbsp;сервер не&nbsp;отвечает', "Ошибка!");
 			}
 		});
 		view.render({
@@ -54,8 +54,11 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 					user.setValues(JSON.parse(msg));
 					app.mainView.loadPage('main.html');
 				}else{
-					app.f7.alert('Неправильно введены логин или пароль', "Ошибка");
+					app.f7.alert('Неправильно введены логин или&nbsp;пароль', "Ошибка!");
 				}
+			},
+			error: function(error){
+				app.f7.alert('Нет подключения к&nbsp;интернету или&nbsp;сервер не&nbsp;отвечает', "Ошибка!");
 			}
 		});
 	}

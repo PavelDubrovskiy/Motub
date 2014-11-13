@@ -6,25 +6,24 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 		{
 			element: '#taskStart',
 			event: 'click',
-			handler: startClick
+			handler: taskStart
 		}
 	];
 
 	function init(query) {
-		currentOrder=localStorage.getItem('currentOrder');
+		var currentOrder=localStorage.getItem('currentOrder');
 		$.ajax({
 			type: "POST",
 			async: true,
 			url: app.config.source+"/api/getOrder/",
 			data: 'id='+currentOrder+'&code='+user.code,
 			success: function(msg){
-				console.log(msg);
 				if(msg=='' || msg=='error'){
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{
 					order=JSON.parse(msg);
 					localStorage.setItem('order',msg);
-					if(user.igroup.path=='mon' && order.status=='new') app.level='01';
+					if(user.igroup.path=='mon' && order.status=='new') localStorage.setItem('level','01');
 					view.render({
 						bindings: bindings,
 						order:order
@@ -32,7 +31,6 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 				}
 			}
 		});
-			
 	}
 	
 	// Клик на кнопку начала задания
@@ -54,9 +52,8 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	
 	// Переход к началу задания
 	function taskStart() {
-		console.log(user);
-		if(user.igroup.path=='mon' && app.level=='00'){
-			app.level='01';
+		if(user.igroup.path=='mon' && localStorage.getItem('level')=='00'){
+			 localStorage.setItem('level','01');
 		}
 		app.mainView.loadPage('takePhoto.html');
 	}

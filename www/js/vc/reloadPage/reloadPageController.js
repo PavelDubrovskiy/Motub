@@ -3,7 +3,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	var bindings = [
 	];
 	function init(query) {
-		window.setTimeout(function(){app.mainView.loadPage('takePhoto.html')},1000);
+		window.setTimeout(function(){app.mainView.loadPage(query.path)},1000);
 		view.render({
 			bindings: bindings
 		});
