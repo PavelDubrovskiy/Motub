@@ -108,13 +108,14 @@ define('app', ['js/router'], function(Router) {
 		var order=JSON.parse(localStorage.getItem('order'));
 		var user=JSON.parse(localStorage.getItem('User'));
 		var orders=JSON.parse(localStorage.getItem('orders'));
+		var level=localStorage.getItem('level');
 		orders[order.id].status=status;
 		localStorage.setItem('orders',JSON.stringify(orders));
 		$.ajax({
 			type: "POST",
 			async: true,
 			url: config.source+"/api/closeOrder/",
-			data: 'id='+order.id+'&code='+user.code+'&status='+status,
+			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level,
 			success: function(msg){
 
 			}

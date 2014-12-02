@@ -17,8 +17,10 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 		order=JSON.parse(localStorage.getItem('order'));
 		$('#navigationNamePhoto').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
 		$('#pageDescriptionPhoto').text(app.photoNames['name'+localStorage.getItem('level')]);
-		path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
-		$('#beforeImg').attr('src',path);
+		try{
+			path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
+			$('#beforeImg').attr('src',path);
+		}catch(e){}
 		view.render({
 			bindings: bindings
 		});
@@ -62,7 +64,8 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		localStorage.setItem('level','06');
 	 		app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='06'){
-	 		checkAddress();
+	 		app.closeOrder('done');
+ 			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='16'){
 	 		app.closeOrder('error');
 			app.mainView.loadPage('main.html');
@@ -74,10 +77,6 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		localStorage.setItem('level','06');
 	 		app.mainView.loadPage('question.html');
 	 	}*/
-	}
-	function checkAddress() {
- 		app.closeOrder('done');
- 		app.mainView.loadPage('success.html');
 	}
 	return {
 		init: init
