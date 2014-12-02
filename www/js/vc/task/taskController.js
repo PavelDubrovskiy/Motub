@@ -58,7 +58,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	
 	// Переход к началу задания
 	function taskStart() {
-		if(user.igroup.path=='mon' && localStorage.getItem('level')=='00'){
+		if(user.igroup.path=='mon' && (order.status=='new' || order.status=='remark')) {
 			 localStorage.setItem('level','01');
 		}
 		app.mainView.loadPage('takePhoto.html');
