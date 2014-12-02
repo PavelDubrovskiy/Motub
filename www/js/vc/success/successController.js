@@ -1,6 +1,6 @@
 define(["app","js/vc/success/successView"], function(app, view) {
 	var $ = Framework7.$;
-	var order;
+	var order, orders;
 	var bindings = [
 		{
 			element: '.unexpectedCase',
@@ -8,21 +8,42 @@ define(["app","js/vc/success/successView"], function(app, view) {
 			handler: unexpectedCase
 		}
 	];
-	
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));
+		orders=JSON.parse(localStorage.getItem('orders'));
 		$('#navigationNameSuccess').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
-		$('#pageDescriptionSuccess').html(app.settings.description[localStorage.getItem('level')]);
-		if(localStorage.getItem('level')=='06_01'){
-			app.closeOrder();
+		var next=0;
+		var remark=false;
+		for(var i in orders){
+			if(orders[i].address==order.address && orders[i].status=='new'){
+				next=orders[i].id;
+			}
+		}
+		$('#unexpectedCase').hide();
+		if(next!=0){
+			localStorage.setItem('currentOrder',next);
+			localStorage.setItem('order',JSON.stringify(orders[next]));
+			localStorage.setItem('level','06_01');
+			$('#pageDescriptionSuccess').html(app.settings.description['06_01']);
 			$('#successSubmit').click(function(){app.mainView.loadPage('task.html');});
 			$('#successSubmitText').text('Перейти к заданию');
-			$('#unexpectedCase').hide();
 		}else{
-			app.closeOrder();
-			$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
-			$('#navigationNameSuccess').text('Перейти к списку задач');
-			$('#unexpectedCase').hide();
+			for(var i in orders){
+				if(orders[i].status=='remark' || orders[i].status=='stop'){
+					remark=true;
+				}
+			}
+			if(remark==true){
+				localStorage.setItem('level','06_02');
+				$('#pageDescriptionSuccess').html(app.settings.description['06_02']);
+				$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
+				$('#successSubmitText').text('Перейти к задачам');
+			}else{
+				localStorage.setItem('level','06_03');
+				$('#pageDescriptionSuccess').html(app.settings.description['06_03']);
+				$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
+				$('#successSubmitText').text('Перейти к списку задач');
+			}
 		}
 		view.render({
 			bindings: bindings

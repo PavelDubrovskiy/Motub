@@ -12,7 +12,13 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 
 	function init(query) {
 		var currentOrder=localStorage.getItem('currentOrder');
-		$.ajax({
+		order=JSON.parse(localStorage.getItem('order'));
+		if(user.igroup.path=='mon' && order.status=='new') localStorage.setItem('level','01');
+		view.render({
+			bindings: bindings,
+			order:order
+		});
+		/*$.ajax({
 			type: "POST",
 			async: true,
 			url: app.config.source+"/api/getOrder/",
@@ -30,7 +36,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 					});
 				}
 			}
-		});
+		});*/
 	}
 	
 	// Клик на кнопку начала задания

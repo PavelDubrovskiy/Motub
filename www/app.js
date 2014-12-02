@@ -9,8 +9,8 @@ define('app', ['js/router'], function(Router) {
 	localStorage.setItem('level','00');
 	var f7 = new Framework7({
 		modalTitle: ' ',
-		/*swipePanelThreshold: 50,
-		pushState: true,*/
+		/*swipePanelThreshold: 50,*/
+		pushState: true,
 		animateNavBackIcon: true,
 		
 		sortable: false,
@@ -21,6 +21,35 @@ define('app', ['js/router'], function(Router) {
 	var mainView = f7.addView('.view-main', {
 		dynamicNavbar: true
 	});
+	var photoNames={
+		name00: 'ПРИВЯЗКА',
+		name01: 'СТАТУС ДО МОНТАЖА',
+		name02: 'ДЕМОНТАЖ ГОТОВ',
+		name03: 'КРЕПЁЖ ГОТОВ',
+		name04: 'ОТВЕРСТИЯ ЗАШПАКЛЁВАНЫ',
+		name05: 'ФИНАЛ-МОНТАЖ',
+		name06: 'ФАСАД-ЗАЯВКА',
+		name07: 'СТАТУС ДО ФАСАДА',
+		name08: 'ГОТОВО ДЛЯ ОКРАСКИ',
+		name09: 'ФИНАЛ-ФАСАД',
+		name10: 'НАРУШЕНИЕ-МОНТАЖ',
+		name11: 'ИСПРАВЛЕНО-МОНТАЖ',
+		name12: 'НАРУШЕНИЕ-ФАСАД',
+		name13: 'ИСПРАВЛЕНО-ФАСАД',
+		name14: 'ОБНАРУЖЕН-ПРИСВОИТЬ УН',
+		name15: 'ДЕМОНТАЖ-ПРИСВОИТЬ УН',
+		name16: 'СТОП-НЕШТАТНАЯ',
+		name17: 'ТРАНЗИТ-НЕШТАТНАЯ',
+		name18: 'ЗАПРОЕКТИРОВАНО'
+	};
+	var statusNames={
+		new: 'Новый',
+		play: 'В работе',
+		remark: 'Замечание',
+		stop: 'Отложена',
+		error: 'Нештатная ситуация',
+		done: 'Выполнен'
+	};
 	var config={
 		source:'http://test02.one-touch.ru'
 	};
@@ -78,8 +107,9 @@ define('app', ['js/router'], function(Router) {
 	var closeOrder=function(status){
 		var order=JSON.parse(localStorage.getItem('order'));
 		var user=JSON.parse(localStorage.getItem('User'));
-		localStorage.setItem('level','00');
-		localStorage.removeItem('order');
+		var orders=JSON.parse(localStorage.getItem('orders'));
+		orders[order.id].status=status;
+		localStorage.setItem('orders',JSON.stringify(orders));
 		$.ajax({
 			type: "POST",
 			async: true,
@@ -96,7 +126,12 @@ define('app', ['js/router'], function(Router) {
 		router: Router,
 		config: config,
 		sendFile: sendFile,
-		closeOrder: closeOrder
+		closeOrder: closeOrder,
+		currentFile: '',
+		photoNames: photoNames,
+		statusNames: statusNames,
+		stopped: '',
+		stoppedShow: false
 	};
 });
 

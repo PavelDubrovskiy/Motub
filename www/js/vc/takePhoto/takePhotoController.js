@@ -2,7 +2,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	var $ = Framework7.$;
 	var user=new User();
 	var path;
-	var currentFile;
 	var order;
 	var bindings = [
 		{
@@ -14,6 +13,14 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			element: '#unexpectedCase',
 			event: 'click',
 			handler: unexpectedCase
+		},{
+			element: '#stopTask',
+			event: 'click',
+			handler: stopTask
+		},{
+			element: '#noDamage',
+			event: 'click',
+			handler: noDamage
 		}
 	];
 	
@@ -21,6 +28,14 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		order=JSON.parse(localStorage.getItem('order'));
 		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
 		$('#pageDescription').html(app.settings.description[localStorage.getItem('level')]);
+		if(localStorage.getItem('level')=='01'){
+			$('#stopTask').addClass('st_hidden');
+		}
+		if(localStorage.getItem('level')=='06'){
+			$('#unexpectedCase').addClass('st_hidden');
+			$('#stopTask').addClass('st_hidden');
+			$('#noDamage').removeClass('st_hidden');
+		}
 		view.render({
 			bindings: bindings
 		});
@@ -41,8 +56,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
 		}catch(e){
-			localStorage.setItem('level','00');
-			app.mainView.loadPage('main.html');
+			localStorage.setItem('level','16');
+			app.mainView.loadPage('photo.html');
 		}
 	}
 	// Нештатная ситуация
@@ -63,9 +78,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		currentFile=mediaFiles[0];
-		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
-		app.sendFile(order, path, localStorage.getItem('level'));
+		app.currentFile=mediaFiles[0];
 		logicController();
 	}
 	function captureError(error){
@@ -74,24 +87,25 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	// Управлятор фотками
 	function logicController(){
 		if(localStorage.getItem('level')=='01'){
-			localStorage.setItem('level','02');
-	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
-	 	}else if(localStorage.getItem('level')=='02'){
-	 		localStorage.setItem('level','03');
-	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+			app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='03'){
-	 		localStorage.setItem('level','04');
-	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
-	 	}else if(localStorage.getItem('level')=='04'){
-	 		localStorage.setItem('level','05');
-	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='05'){
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='06'){
+	 		app.mainView.loadPage('photo.html');
+	 	}/*}else if(localStorage.getItem('level')=='05'){
 	 		localStorage.setItem('level','06');
 	 		app.mainView.loadPage('question.html');
-	 	}else if(localStorage.getItem('level')=='16'){
-	 		localStorage.setItem('level','00');
-	 		app.mainView.loadPage('main.html');
-	 	}
+	 	}*/
+	}
+	function stopTask(){
+		app.closeOrder('stop');
+	 	app.mainView.loadPage('main.html');
+	}
+	function noDamage(){
+		app.closeOrder('done');
+	 	app.mainView.loadPage('success.html');
 	}
 	return {
 		init: init

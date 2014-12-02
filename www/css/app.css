@@ -236,17 +236,27 @@ i.icon.icon-camera{
 	vertical-align: middle;
 }
 
-.button.button-gray{
-	border-color: #aaa;
-	color: #999;
+.button.m_multirow{
+	white-space: normal;
+	height: auto;
+	line-height: 1.5;
+	padding: 30px;
 }
-	.button.button-gray.active-state{
-		background: #ddd;
-	}
+
+.button.button-gray,
+.button.button-gray.active-state{
+	background: #bbb;
+	color: #fff;
+}
 
 .button.button-red,
 .button.button-red.active-state{
 	background: #F44336;
+}
+
+.button.button-green,
+.button.button-green.active-state{
+	background: #75a800;
 }
 
 
@@ -495,6 +505,11 @@ img{
 .b_img{
 	min-height: 2rem;
 	text-align: center;
+}
+
+/* $st_hidden */
+.st_hidden{
+	display: none;
 }
 
 /*.b_img,
