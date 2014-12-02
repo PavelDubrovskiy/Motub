@@ -45,12 +45,10 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		localStorage.removeItem('order');
 		localStorage.setItem('order',JSON.stringify(orders[id]));
 		localStorage.setItem('currentOrder',id);
-		if(orders[id].status=='new' || orders[id].status=='remark'){
-			app.mainView.loadPage('task.html');
-		}else{
+		if(orders[id].status!='new' && orders[id].status!='remark'){
 			localStorage.setItem('level',orders[id].level);
-			app.mainView.loadPage('takePhoto.html');
 		}
+		app.mainView.loadPage('task.html');
 	}
 	function toMain(){
 		localStorage.setItem('level','00');
