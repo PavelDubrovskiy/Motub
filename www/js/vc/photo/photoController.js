@@ -17,6 +17,8 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 		order=JSON.parse(localStorage.getItem('order'));
 		$('#navigationNamePhoto').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
 		$('#pageDescriptionPhoto').text(app.photoNames['name'+localStorage.getItem('level')]);
+		path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
+		$('#beforeImg').attr('src',path);
 		view.render({
 			bindings: bindings
 		});
