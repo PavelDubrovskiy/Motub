@@ -51,6 +51,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		}
 	}
 	function takePhoto16() {
+		localStorage.setItem('lastLevel',localStorage.getItem('level'));
 		localStorage.setItem('level','16');
 	 	try{
 			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
