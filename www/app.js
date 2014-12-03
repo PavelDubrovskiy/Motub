@@ -99,7 +99,7 @@ define('app', ['js/router'], function(Router) {
 		params.order = order.id;
 		params.name = order.fileName+photoNames[level];
 		options.params = params;
-		
+		alert(params.name);
 		var ft = new FileTransfer();
 		console.log(options);
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
