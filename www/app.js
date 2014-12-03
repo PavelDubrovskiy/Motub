@@ -98,9 +98,8 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		params.level = level;
 		params.order = order.id;
 		var today = new Date();
-		var dateString = today.getFullYear()+'-'+today.getMonth() + 1+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
+		var dateString = today.getFullYear()+'-'+today.getMonth()+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
 		params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level];
-		alert(params.name);
 		options.params = params;
 		var ft = new FileTransfer();
 		console.log(options);
