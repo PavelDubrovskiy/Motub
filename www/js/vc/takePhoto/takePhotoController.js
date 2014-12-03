@@ -51,13 +51,12 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		}
 	}
 	function takePhoto16() {
+		localStorage.setItem('level','16');
 	 	try{
-	 		localStorage.setItem('level','16');
 			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
 		}catch(e){
-			localStorage.setItem('level','16');
-			app.mainView.loadPage('photo.html');
+			logicController();
 		}
 	}
 	// Нештатная ситуация
@@ -94,10 +93,9 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='06'){
 	 		app.mainView.loadPage('photo.html');
-	 	}/*}else if(localStorage.getItem('level')=='05'){
-	 		localStorage.setItem('level','06');
-	 		app.mainView.loadPage('question.html');
-	 	}*/
+	 	}else if(localStorage.getItem('level')=='16'){
+	 		app.mainView.loadPage('photo.html');
+	 	}
 	}
 	function stopTask(){
 		app.closeOrder('stop');
