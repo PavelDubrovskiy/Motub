@@ -97,7 +97,7 @@ define('app', ['js/router'], function(Router) {
 		var params = {};
 		params.level = level;
 		params.order = order.id;
-		params.name = order.fileName+photoNames[level];
+		params.name = order.fileName+photoNames['name'+level];
 		options.params = params;
 		alert(params.name);
 		var ft = new FileTransfer();
