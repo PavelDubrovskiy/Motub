@@ -104,6 +104,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			filesFS.forEach(function(element, index, array) {
 				var path=element.params.path;
 				var options=element.options;
+				var ft = new FileTransfer();
 				ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 			});
 		}
