@@ -4,7 +4,9 @@ define(["js/utils/common"], function(utils) {
 		$('#taskAddress').text(params.order.address);
 		$('#taskUid').text(params.order.uid);
 		$('#taskInfo').html(params.order.info);
-		$('#taskImg').attr('src',params.order.files['00']['path']);
+		try{
+			$('#taskImg').attr('src',params.order.files['00']['path']);
+		}catch(){}
 		$('#taskDescription').html(params.order.description);
 		utils.bindEvents(params.bindings);
 	}
