@@ -98,7 +98,16 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
-	
+	var sendFilesFS=function(){
+		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
+		if(filesFS.length>0){
+			filesFS.forEach(function(element, index, array) {
+				var path=element.params.path;
+				var options=element.options;
+				ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
+			});
+		}
+	};
 	var closeOrder=function(status){
 		var order=JSON.parse(localStorage.getItem('order'));
 		var user=JSON.parse(localStorage.getItem('User'));
@@ -127,7 +136,8 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		photoNames: photoNames,
 		statusNames: statusNames,
 		stopped: '',
-		stoppedShow: false
+		stoppedShow: false,
+		sendFilesFS: sendFilesFS
 	};
 });
 
