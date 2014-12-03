@@ -54,47 +54,52 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		source:'http://test02.one-touch.ru'
 	};
 	var sendFile=function(order, path, level){
-		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
-		//JSON.parse(msg);
-		
-		
-		var options = new FileUploadOptions();
-		options.fileKey = "upload";
-		options.fileName = path.substr(path.lastIndexOf('/') + 1);
-		options.mimeType = "image/jpg";
-		
-		var params = {};
-		params.level = level;
-		params.order = order.id;
-		var today = new Date();
-		var dateString = today.getFullYear()+'-'+today.getMonth()+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
-		params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level];
-		options.params = params;
-		var ft = new FileTransfer();
-		console.log(options);
-		
-		if(typeof filesFS===undefined){
-			var filesFS=[];
-		}
-		filesFS.push(options);
-		localStorage.setItem('filesFS',JSON.stringify(filesFS));
-		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
-		var win = function (r) {
-			for(var i in filesFS){
-				if(filesFS[i].params.name==options.params.name){
-					delete filesFS[i];
-				}
+		try(
+			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
+			//JSON.parse(msg);
+			
+			
+			var options = new FileUploadOptions();
+			options.fileKey = "upload";
+			options.fileName = path.substr(path.lastIndexOf('/') + 1);
+			options.mimeType = "image/jpg";
+			
+			var params = {};
+			params.level = level;
+			params.order = order.id;
+			var today = new Date();
+			var dateString = today.getFullYear()+'-'+today.getMonth()+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
+			params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level];
+			options.params = params;
+			var ft = new FileTransfer();
+			console.log(options);
+			
+			if(typeof filesFS===undefined){
+				var filesFS=[];
 			}
+			filesFS.push(options);
 			localStorage.setItem('filesFS',JSON.stringify(filesFS));
-			//console.log("Code = " + r.responseCode);
-			console.log("Response = " + r.response);
-			//console.log("Sent = " + r.bytesSent);
-		}
-		
-		var fail = function (error) {
-			//alert("An error has occurred: Code = " + error.code);
-			console.log("upload error source " + error.source);
-			console.log("upload error target " + error.target);
+			
+			ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
+			var win = function (r) {
+				for(var i in filesFS){
+					if(filesFS[i].params.name==options.params.name){
+						delete filesFS[i];
+					}
+				}
+				localStorage.setItem('filesFS',JSON.stringify(filesFS));
+				//console.log("Code = " + r.responseCode);
+				console.log("Response = " + r.response);
+				//console.log("Sent = " + r.bytesSent);
+			}
+			
+			var fail = function (error) {
+				//alert("An error has occurred: Code = " + error.code);
+				console.log("upload error source " + error.source);
+				console.log("upload error target " + error.target);
+			}
+		}catch(e){
+			alert(e);
 		}
 	};
 	var closeOrder=function(status){
