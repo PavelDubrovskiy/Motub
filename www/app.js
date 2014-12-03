@@ -1,7 +1,7 @@
-define('app', ['js/router'], function(Router) {
+define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	Router.init();
 	var $ = Framework7.$;
-	
+	var user=new User();
 	//todo
 	/*if(localStorage.getItem('order')==''){
 		localStorage.setItem('level','00');
@@ -97,9 +97,11 @@ define('app', ['js/router'], function(Router) {
 		var params = {};
 		params.level = level;
 		params.order = order.id;
-		params.name = order.fileName+photoNames['name'+level];
-		options.params = params;
+		var today = new Date();
+		var dateString = today.getFullYear()+'-'+today.getMonth() + 1+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
+		params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level];
 		alert(params.name);
+		options.params = params;
 		var ft = new FileTransfer();
 		console.log(options);
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
