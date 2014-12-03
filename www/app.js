@@ -54,7 +54,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		source:'http://test02.one-touch.ru'
 	};
 	var sendFile=function(order, path, level){
-		try(
+		try{
 			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 			//JSON.parse(msg);
 			
