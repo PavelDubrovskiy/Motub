@@ -56,8 +56,10 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var sendFile=function(order, path, level){
 		try{
 			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
-			//JSON.parse(msg);
-			
+			alert(filesFS);
+			if(typeof filesFS===null){
+				filesFS=[];
+			}
 			
 			var options = new FileUploadOptions();
 			options.fileKey = "upload";
