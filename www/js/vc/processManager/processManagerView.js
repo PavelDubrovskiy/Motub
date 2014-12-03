@@ -4,6 +4,7 @@ define(["app","js/utils/common"], function(app, utils) {
 	var compiledTemplate = Template7.compile(template);
 	function render(params){
 		var filesFS={files:JSON.parse(localStorage.getItem('filesFS'))};
+		console.log(filesFS);
 		html = compiledTemplate(filesFS);
 		$('#processManagerPage').html(html);
 		utils.bindEvents(params.bindings);

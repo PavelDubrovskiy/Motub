@@ -53,22 +53,31 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var config={
 		source:'http://test02.one-touch.ru'
 	};
+	
+	
+	var win = function (r) {
+		alert('file win');
+		for(var i in filesFS){
+			if(filesFS[i].params.name==options.params.name){
+				delete filesFS[i];
+			}
+		}
+		localStorage.setItem('filesFS',JSON.stringify(filesFS));
+		console.log("Code = " + r.responseCode);
+		console.log("Response = " + r.response);
+		console.log("Sent = " + r.bytesSent);
+	}
+	
+	var fail = function (error) {
+		alert('file fail');
+		console.log("An error has occurred: Code = " + error.code);
+		console.log("upload error source " + error.source);
+		console.log("upload error target " + error.target);
+	}
 	var sendFile=function(order, path, level){
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
-		if(filesFS==Null){
-			alert('Null');
-			filesFS=[];
-		}
 		if(filesFS===null){
 			alert('null');
-			filesFS=[];
-		}
-		if(typeof filesFS==='null'){
-			alert('typeof === null');
-			filesFS=[];
-		}
-		if(typeof filesFS==='Null'){
-			alert('typeof === Null');
 			filesFS=[];
 		}
 		var options = new FileUploadOptions();
@@ -93,24 +102,8 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));
 		
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
-		var win = function (r) {
-			for(var i in filesFS){
-				if(filesFS[i].params.name==options.params.name){
-					delete filesFS[i];
-				}
-			}
-			localStorage.setItem('filesFS',JSON.stringify(filesFS));
-			//console.log("Code = " + r.responseCode);
-			console.log("Response = " + r.response);
-			//console.log("Sent = " + r.bytesSent);
-		}
-		
-		var fail = function (error) {
-			//alert("An error has occurred: Code = " + error.code);
-			console.log("upload error source " + error.source);
-			console.log("upload error target " + error.target);
-		}
 	};
+	
 	var closeOrder=function(status){
 		var order=JSON.parse(localStorage.getItem('order'));
 		var user=JSON.parse(localStorage.getItem('User'));
