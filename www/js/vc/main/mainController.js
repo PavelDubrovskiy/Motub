@@ -43,6 +43,10 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	function setOrder(){
 		var id=$(this).data('id');
 		localStorage.removeItem('order');
+		try{
+			orders[id].points=JSON.parse(JSON.parse(orders[id].points));
+		}catch(e){}
+		orders[id].pointsNum=0;
 		localStorage.setItem('order',JSON.stringify(orders[id]));
 		localStorage.setItem('currentOrder',id);
 		if(orders[id].status!='new' && orders[id].status!='remark'){

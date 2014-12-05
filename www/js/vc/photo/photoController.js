@@ -57,26 +57,46 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 		if(localStorage.getItem('level')=='01'){
 			localStorage.setItem('level','03');
 	 		app.mainView.loadPage('takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='02'){
+	 		localStorage.setItem('level','04');
+	 		app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='03'){
 	 		localStorage.setItem('level','05');
 	 		app.mainView.loadPage('takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='04'){
+	 		localStorage.setItem('level','04_01');
+	 		app.mainView.loadPage('question.html');
 	 	}else if(localStorage.getItem('level')=='05'){
 	 		localStorage.setItem('level','06');
 	 		app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='06'){
 	 		app.closeOrder('done');
  			app.mainView.loadPage('success.html');
+	 	}else if(localStorage.getItem('level')=='07'){
+	 		localStorage.setItem('level','07_01');
+	 		app.mainView.loadPage('question.html');
+	 	}else if(localStorage.getItem('level')=='10'){
+	 		localStorage.setItem('level','04_03');
+	 		var temp=false;
+			order.points.forEach(function(element, index, array){
+				if(temp==false && (element=='next' || element=='stop')){
+					order.pointsNum=index+1;
+					order.points[index]='next';
+					temp=true;
+				}
+			});
+			console.log(order);
+			if(temp==true){
+				localStorage.setItem('order',JSON.stringify(order));
+		 		app.mainView.loadPage('question.html');
+		 	}else{
+		 		app.closeOrder('done');
+		 		app.mainView.loadPage('success.html');
+		 	}
 	 	}else if(localStorage.getItem('level')=='16'){
 	 		app.closeOrder('error');
 			app.mainView.loadPage('main.html');
 	 	}
-	 	/*else if(localStorage.getItem('level')=='04'){
-	 		localStorage.setItem('level','05');
-	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
-	 	}else if(localStorage.getItem('level')=='05'){
-	 		localStorage.setItem('level','06');
-	 		app.mainView.loadPage('question.html');
-	 	}*/
 	}
 	return {
 		init: init

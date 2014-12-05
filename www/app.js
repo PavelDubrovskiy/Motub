@@ -24,23 +24,16 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var photoNames={
 		name00: 'ПРИВЯЗКА',
 		name01: 'СТАТУС ДО МОНТАЖА',
-		name02: 'ДЕМОНТАЖ ГОТОВ',
+		name02: 'ДО ДЕМОНТАЖА',
 		name03: 'КРЕПЁЖ ГОТОВ',
-		name04: 'ОТВЕРСТИЯ ЗАШПАКЛЁВАНЫ',
+		name04: 'ДЕМОНТАЖ ГОТОВ',
 		name05: 'ФИНАЛ-МОНТАЖ',
 		name06: 'ФАСАД-ЗАЯВКА',
-		name07: 'СТАТУС ДО ФАСАДА',
-		name08: 'ГОТОВО ДЛЯ ОКРАСКИ',
-		name09: 'ФИНАЛ-ФАСАД',
-		name10: 'НАРУШЕНИЕ-МОНТАЖ',
-		name11: 'ИСПРАВЛЕНО-МОНТАЖ',
-		name12: 'НАРУШЕНИЕ-ФАСАД',
-		name13: 'ИСПРАВЛЕНО-ФАСАД',
-		name14: 'ОБНАРУЖЕН-ПРИСВОИТЬ УН',
-		name15: 'ДЕМОНТАЖ-ПРИСВОИТЬ УН',
+		name07: 'ОБНАРУЖЕН-ПРИСВОИТЬ УН',
+		name08: 'ДО НАЧАЛА РАБОТ',
+		name09: 'РЕЗУЛЬТАТ РАБОТ',
+		name10: 'ФИНАЛ-ФАСАД',
 		name16: 'СТОП-НЕШТАТНАЯ',
-		name17: 'ТРАНЗИТ-НЕШТАТНАЯ',
-		name18: 'ЗАПРОЕКТИРОВАНО'
 	};
 	var statusNames={
 		new: 'Новый',
@@ -91,6 +84,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		var today = new Date();
 		var dateString = today.getFullYear()+'-'+today.getMonth()+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
 		params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level];
+		params.programName = order.id+'_'+level+'_'+user.name+'_'+order.pointsNum;
 		options.params = params;
 		var ft = new FileTransfer();
 		//console.log(options);
@@ -115,17 +109,19 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		var orders=JSON.parse(localStorage.getItem('orders'));
 		var level=localStorage.getItem('level');
 		var lastLevel=localStorage.getItem('lastLevel');
-		orders[order.id].status=status;
-		orders[order.id].level=level;
+		order.status=status;
+		order.level=level;
 		if(lastLevel){
-			orders[order.id].level=lastLevel;
+			order.level=lastLevel;
 		}
+		orders[order.id]=order;
+		localStorage.setItem('order',JSON.stringify(order));
 		localStorage.setItem('orders',JSON.stringify(orders));
 		$.ajax({
 			type: "POST",
 			async: true,
 			url: config.source+"/api/closeOrder/",
-			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel,
+			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel+'&points='+JSON.stringify(order.points),
 			success: function(msg){
 
 			}

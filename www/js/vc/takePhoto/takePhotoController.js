@@ -21,20 +21,51 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			element: '#noDamage',
 			event: 'click',
 			handler: noDamage
+		},{
+			element: '#answerYes',
+			event: 'click',
+			handler: actYes
+		},
+		{
+			element: '#answerNo',
+			event: 'click',
+			handler: actNo
+		},
+		{
+			element: '#stopTaskQuestionNo',
+			event: 'click',
+			handler: stopTaskNo
 		}
 	];
 	
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));
 		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
-		$('#pageDescription').html(app.settings.description[localStorage.getItem('level')]);
+		$('#pageDescription').html(app.settings.description[localStorage.getItem('level')].replace('№n','№'+order.pointsNum));
 		if(localStorage.getItem('level')=='01'){
 			$('#stopTask').addClass('st_hidden');
-		}
-		if(localStorage.getItem('level')=='06'){
+		}else if(localStorage.getItem('level')=='06'){
 			$('#unexpectedCase').addClass('st_hidden');
 			$('#stopTask').addClass('st_hidden');
 			$('#noDamage').removeClass('st_hidden');
+		}else
+		if(localStorage.getItem('level')=='04_01'){
+			$('#unexpectedCaseQuestion').addClass('st_hidden');
+			$('#stopTaskQuestion').addClass('st_hidden');
+		}else if(localStorage.getItem('level')=='04_02'){
+			$('#stopTaskQuestion').addClass('st_hidden');
+		}else if(localStorage.getItem('level')=='04_03'){
+			try{
+				var filesFS=JSON.parse(localStorage.getItem('filesFS'));
+				filesFS.forEach(function(element, index, array) {
+					if(element.params.programName==order.id+'_'+level+'_'+user.name+'_'+order.pointsNum){
+						$('#pageDescriptionQuestion').html().replace('[foto]','<img src="'+element.params.path+'">');
+					}
+				});
+			}catch(e){}
+			$('#stopTaskQuestionNo').removeClass('st_hidden');
+			$('#answerNo').addClass('st_hidden');
+			$('#stopTaskQuestion').addClass('st_hidden');
 		}
 		view.render({
 			bindings: bindings
@@ -88,13 +119,26 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function logicController(){
 		if(localStorage.getItem('level')=='01'){
 			app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='02'){
+	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='03'){
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='04'){
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='05'){
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='06'){
 	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='07'){
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='10'){
+	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='16'){
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='04_04'){
+			order.points[order.pointsNum-1]='done';
+			localStorage.setItem('order',JSON.stringify(order));
+	 		localStorage.setItem('level','10');
 	 		app.mainView.loadPage('photo.html');
 	 	}
 	}

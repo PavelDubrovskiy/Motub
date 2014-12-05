@@ -18,7 +18,7 @@
 	<div data-page="question" class="page">
 		<div class="page-content flex-container">
 		
-			<div class="flex-block m_size-2 f_big f_center" id="pageDescriptionQuestion"></div>
+			<div class="flex-block-fix f_medium f_center" id="pageDescriptionQuestion"></div>
 			
 			<a id="answerYes" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
 				<i class="icon icon-checkmark-round"></i><span>Да</span>
@@ -27,9 +27,14 @@
 			<a id="answerNo" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
 				<i class="icon icon-close-round"></i><span>Нет</span>
 			</a>
-			
+			<a id="stopTaskQuestionNo" href="#" class="flex-block m_size-8 button button-fill f_big m_margin st_hidden">
+				<i class="icon icon-close-round"></i><span>Нет, отложить задачу</span>
+			</a>
 			<a id="unexpectedCaseQuestion" href="#" class="flex-block m_size-8 button button-fill button-red f_big m_margin">
 				<i class="icon icon-alert-circled"></i><span>Нештатная ситуация</span>
+			</a>
+			<a id="stopTaskQuestion" href="#" class="flex-block m_size-8 button button-fill button-gray f_big m_margin">
+				<i class="icon icon-android-data"></i><span>Отложить задачу</span>
 			</a>
 		</div>				
 	</div>

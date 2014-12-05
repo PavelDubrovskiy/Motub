@@ -11,32 +11,13 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	];
 
 	function init(query) {
+		$('#navigationNameTask').text('Задача level:'+localStorage.getItem('level'));
 		var currentOrder=localStorage.getItem('currentOrder');
 		order=JSON.parse(localStorage.getItem('order'));
-		if(user.igroup.path=='mon' && order.status=='new') localStorage.setItem('level','01');
 		view.render({
 			bindings: bindings,
 			order:order
 		});
-		/*$.ajax({
-			type: "POST",
-			async: true,
-			url: app.config.source+"/api/getOrder/",
-			data: 'id='+currentOrder+'&code='+user.code,
-			success: function(msg){
-				if(msg=='' || msg=='error'){
-					app.f7.alert('Сервер не отвечает', "Ошибка");
-				}else{
-					order=JSON.parse(msg);
-					localStorage.setItem('order',msg);
-					if(user.igroup.path=='mon' && order.status=='new') localStorage.setItem('level','01');
-					view.render({
-						bindings: bindings,
-						order:order
-					});
-				}
-			}
-		});*/
 	}
 	
 	// Клик на кнопку начала задания
@@ -58,10 +39,36 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	
 	// Переход к началу задания
 	function taskStart() {
-		if(user.igroup.path=='mon' && (order.status=='new' || order.status=='remark')) {
-			 localStorage.setItem('level','01');
+		if(user.igroup.path=='mon' && order.status=='new') {
+			localStorage.setItem('level','01');
+			app.mainView.loadPage('takePhoto.html');
+		}else if(user.igroup.path=='fas' && (order.status=='new' || order.status=='play')){
+			if(order.status=='new' || order.status=='play'){
+				localStorage.setItem('level','00_01');
+			}
+			if(order.points=='""'){
+				order.points=['play'];
+				order.pointsNum=1;
+			}else if(order.pointsNum==0){
+				var temp=false;
+				order.points.forEach(function(element, index, array){
+					if(temp==false && (element=='stop' || element=='play')){
+						order.pointsNum=index+1;
+						temp=true;
+					}
+				});
+			}
+			localStorage.setItem('order',JSON.stringify(order));
+			app.mainView.loadPage('question.html');
+		}else if(user.igroup.path=='mon'){
+			app.mainView.loadPage('takePhoto.html');
+		}else if(user.igroup.path=='fas'){
+			if(localStorage.getItem('level')=='00_01'){
+				app.mainView.loadPage('question.html');
+			}else if(localStorage.getItem('level')=='10'){
+				app.mainView.loadPage('takePhoto.html');
+			}
 		}
-		app.mainView.loadPage('takePhoto.html');
 	}
 	
 	return {
