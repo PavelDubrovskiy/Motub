@@ -10,7 +10,8 @@ define(["app","js/vc/success/successView"], function(app, view) {
 	];
 	document.addEventListener("backbutton", onBackButtonFire, false); 
 	function onBackButtonFire(){
-		localStorage.setItem('level',localStorage.getItem('oldLevel'));
+		return false;
+		//localStorage.setItem('level',localStorage.getItem('oldLevel'));
 	}
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));

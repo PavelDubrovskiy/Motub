@@ -15,7 +15,8 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	];
 	document.addEventListener("backbutton", onBackButtonFire, false); 
 	function onBackButtonFire(){
-		localStorage.setItem('level',localStorage.getItem('oldLevel'));
+		return false;
+		//localStorage.setItem('level',localStorage.getItem('oldLevel'));
 	}
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));
