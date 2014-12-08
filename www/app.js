@@ -53,7 +53,8 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		for(var i in filesFS){
 			console.log(filesFS[i].params.name+'=='+r.response);
 			if(filesFS[i].params.name==r.response){
-				delete filesFS[i];
+				//delete filesFS[i];
+				 filesFS[i].params.status = 'sent';
 			}
 		}
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));
@@ -81,6 +82,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		params.level = level;
 		params.order = order.id;
 		params.path = path;
+		params.status = 'new';
 		var today = new Date();
 		var dateString = today.getFullYear()+'-'+today.getMonth()+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
 		params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level];
