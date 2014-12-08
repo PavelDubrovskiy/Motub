@@ -43,7 +43,15 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		order=JSON.parse(localStorage.getItem('order'));
 		console.log(order);
 		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
-		$('#pageDescription').html(app.settings.description[localStorage.getItem('level')].replace('№n','№'+order.pointsNum));
+		var description=app.settings.description[localStorage.getItem('level')].replace('№n','№'+order.pointsNum);
+		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
+		for(var i in filesFS){
+			console.log(filesFS[i].params.programName+" == "+order.id+'_'+localStorage.getItem('level')+'_'+user.name+'_'+order.pointsNum);
+			if(filesFS[i].params.programName == order.id+'_'+localStorage.getItem('level')+'_'+user.name+'_'+order.pointsNum;){
+				description.replace('[photo]','<p><img src="'+filesFS[i].params.path+'"></p>');
+			}
+		}
+		$('#pageDescription').html(description);
 		if(localStorage.getItem('level')=='01'){
 			buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='06'){
