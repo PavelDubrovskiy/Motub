@@ -48,7 +48,9 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		for(var i in filesFS){
 			console.log(filesFS[i].params.programName+" == "+order.id+'_04_'+user.name+'_'+order.pointsNum);
 			if(filesFS[i].params.programName == order.id+'_04_'+user.name+'_'+order.pointsNum){
-				description.replace('[photo]','<p><img src="'+filesFS[i].params.path+'"></p>');
+				console.log('filesFS try to replace');
+				description.replace('[photo]','<img src="'+filesFS[i].params.path+'">');
+				description.replace('\[photo\]','<img src="'+filesFS[i].params.path+'">');
 			}
 		}
 		$('#pageDescription').html(description);
