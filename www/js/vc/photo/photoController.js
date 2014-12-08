@@ -15,7 +15,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	];
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));
-		$('#navigationNamePhoto').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
+		$('#navigationNamePhoto').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
 		$('#pageDescriptionPhoto').text(app.photoNames['name'+localStorage.getItem('level')]);
 		try{
 			path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
@@ -73,6 +73,9 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		app.closeOrder('done');
  			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='07'){
+	 		console.log('level:07 point:'+order.pointsNum+' act:done');
+			order.points[order.pointsNum-1]='done';
+			localStorage.setItem('order',JSON.stringify(order));
 	 		localStorage.setItem('level','07_01');
 	 		app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='08'){
@@ -82,23 +85,25 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		app.closeOrder('done');
  			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='10'){
-	 		localStorage.setItem('level','04_03');
-	 		var temp=false;
+	 		console.log('level:10 point:'+order.pointsNum+' act:done');
+			order.points[order.pointsNum-1]='done';
+			localStorage.setItem('order',JSON.stringify(order));
+			var temp=false;
 			order.points.forEach(function(element, index, array){
-				if(temp==false && (element=='next' || element=='stop')){
+				if(temp==false && element!='done'){
+					console.log('level:10 point:'+order.pointsNum+' act:select point:'+(index+1));
 					order.pointsNum=index+1;
-					order.points[index]='next';
+					localStorage.setItem('order',JSON.stringify(order));
 					temp=true;
 				}
 			});
-			console.log(order);
 			if(temp==true){
-				localStorage.setItem('order',JSON.stringify(order));
-		 		app.mainView.loadPage('takePhoto.html');
+				localStorage.setItem('level','04_03');
 		 	}else{
 		 		localStorage.setItem('level','04_05');
-	 			app.mainView.loadPage('takePhoto.html');
+	 			
 		 	}
+		 	app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='16'){
 	 		app.closeOrder('error');
 			app.mainView.loadPage('main.html');

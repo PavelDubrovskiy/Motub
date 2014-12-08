@@ -64,7 +64,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			try{
 				var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 				filesFS.forEach(function(element, index, array) {
-					if(element.params.programName==order.id+'_'+level+'_'+user.name+'_'+order.pointsNum){
+					if(element.params.programName==order.id+'_'+localStorage.getItem('level')+'_'+user.name+'_'+order.pointsNum){
 						$('#pageDescriptionQuestion').html().replace('[foto]','<img src="'+element.params.path+'">');
 					}
 				});
@@ -132,9 +132,9 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('level','04_02');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_02' || localStorage.getItem('level')=='07_01' || localStorage.getItem('level')=='04_05'){
-			order.points[order.pointsNum-1]='stop';
+			console.log('actYes level 04_02 07_01 04_05 select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:add point:'+(order.points.length+1));
 			order.points.push('play');
-			order.pointsNum++;
+			order.pointsNum=order.points.length;
 			localStorage.setItem('order',JSON.stringify(order));
 			app.closeOrder('play');
 			localStorage.setItem('level','00_01');
@@ -152,9 +152,10 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('level','04_03');
 			var temp=false;
 			order.points.forEach(function(element, index, array){
-				if(temp==false && element=='stop'){
+				if(temp==false && element!='done'){
+					console.log('actNo level 04_02 07_01 select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:select point:'+(index+1));
 					order.pointsNum=index+1;
-					order.points[index]='next';
+					localStorage.setItem('order',JSON.stringify(order));
 					temp=true;
 				}
 			});
@@ -192,6 +193,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 	}else if(localStorage.getItem('level')=='16'){
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='04_04'){
+	 		console.log('level:04_04 point:'+order.pointsNum+' act:done');
 			order.points[order.pointsNum-1]='done';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		localStorage.setItem('level','10');
@@ -203,8 +205,22 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 	app.mainView.loadPage('main.html');
 	}
 	function stopTaskNo(){
-		localStorage.setItem('level','04_03');
-	 	app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+		var temp=false;
+		order.points.forEach(function(element, index, array){
+			if(temp==false && element!='done' && order.pointsNum!=index+1){
+				console.log('stopTaskNo level select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:select point:'+(index+1));
+				order.pointsNum=index+1;
+				localStorage.setItem('order',JSON.stringify(order));
+				temp=true;
+			}
+		});
+		if(temp==true){
+			localStorage.setItem('level','04_03');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}else{
+	 		localStorage.setItem('level','04_05');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}
 	}
 	function noDamage(){
 		app.closeOrder('done');
