@@ -17,7 +17,8 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	];
 	
 	function init(query) {
-		$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
+		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
+		$('#navigationNameMain').text('Задачи на сегодня');
 		localStorage.removeItem('Orders');
 		$.ajax({
 			type: "POST",

@@ -11,7 +11,8 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	];
 
 	function init(query) {
-		$('#navigationNameTask').text('Задача level:'+localStorage.getItem('level'));
+		//$('#navigationNameTask').text('Задача level:'+localStorage.getItem('level'));
+		$('#navigationNameTask').text('Задача');
 		var currentOrder=localStorage.getItem('currentOrder');
 		order=JSON.parse(localStorage.getItem('order'));
 		view.render({

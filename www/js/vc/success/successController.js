@@ -8,10 +8,15 @@ define(["app","js/vc/success/successView"], function(app, view) {
 			handler: unexpectedCase
 		}
 	];
+	document.addEventListener("backbutton", onBackButtonFire, false); 
+	function onBackButtonFire(){
+		localStorage.setItem('level',localStorage.getItem('oldLevel'));
+	}
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));
 		orders=JSON.parse(localStorage.getItem('orders'));
-		$('#navigationNameSuccess').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
+		//$('#navigationNameSuccess').text('УН: '+order.uid+' level:'+localStorage.getItem('level'));
+		$('#navigationNameSuccess').text('УН: '+order.uid);
 		var next=0;
 		var remark=false;
 		for(var i in orders){
@@ -23,6 +28,7 @@ define(["app","js/vc/success/successView"], function(app, view) {
 		if(next!=0){
 			localStorage.setItem('currentOrder',next);
 			localStorage.setItem('order',JSON.stringify(orders[next]));
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','06_01');
 			$('#pageDescriptionSuccess').html(app.settings.description['06_01']);
 			$('#successSubmit').click(function(){app.mainView.loadPage('task.html');});
@@ -34,11 +40,13 @@ define(["app","js/vc/success/successView"], function(app, view) {
 				}
 			}
 			if(remark==true){
+				localStorage.setItem('oldLevel',localStorage.getItem('level'));
 				localStorage.setItem('level','06_02');
 				$('#pageDescriptionSuccess').html(app.settings.description['06_02']);
 				$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
 				$('#successSubmitText').text('Перейти к задачам');
 			}else{
+				localStorage.setItem('oldLevel',localStorage.getItem('level'));
 				localStorage.setItem('level','06_03');
 				$('#pageDescriptionSuccess').html(app.settings.description['06_03']);
 				$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});

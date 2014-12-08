@@ -13,9 +13,14 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 			handler: saveNewPhoto
 		}
 	];
+	document.addEventListener("backbutton", onBackButtonFire, false); 
+	function onBackButtonFire(){
+		localStorage.setItem('level',localStorage.getItem('oldLevel'));
+	}
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));
-		$('#navigationNamePhoto').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
+		//$('#navigationNamePhoto').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
+		$('#navigationNamePhoto').text('УН: '+order.uid);
 		$('#pageDescriptionPhoto').text(app.photoNames['name'+localStorage.getItem('level')]);
 		try{
 			path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
@@ -54,6 +59,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function logicController(){
+		localStorage.setItem('oldLevel',localStorage.getItem('level'));
 		if(localStorage.getItem('level')=='01'){
 			localStorage.setItem('level','03');
 	 		app.mainView.loadPage('takePhoto.html');

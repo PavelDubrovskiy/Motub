@@ -38,21 +38,27 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		}
 	];
 	
+	document.addEventListener("backbutton", onBackButtonFire, false); 
+	function onBackButtonFire(){
+		localStorage.setItem('level',localStorage.getItem('oldLevel'));
+	}
 	function init(query) {
 		var buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
 		order=JSON.parse(localStorage.getItem('order'));
 		console.log(order);
-		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
+		//$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
+		$('#navigationName').text('УН: '+order.uid);
 		var description=app.settings.description[localStorage.getItem('level')].replace('№n','№'+order.pointsNum);
-		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
-		for(var i in filesFS){
-			console.log(filesFS[i].params.programName+" == "+order.id+'_04_'+user.name+'_'+order.pointsNum);
-			if(filesFS[i].params.programName == order.id+'_04_'+user.name+'_'+order.pointsNum){
-				console.log('filesFS try to replace');
-				description.replace('[photo]','<img src="'+filesFS[i].params.path+'">');
-				description.replace('\[photo\]','<img src="'+filesFS[i].params.path+'">');
+		try{
+			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
+			for(var i in filesFS){
+				console.log(filesFS[i].params.programName+" == "+order.id+'_04_'+user.name+'_'+order.pointsNum);
+				if(filesFS[i].params.programName == order.id+'_04_'+user.name+'_'+order.pointsNum){
+					console.log('filesFS try to replace');
+					description=description.replace('photo','<img src="'+filesFS[i].params.path+'">');
+				}
 			}
-		}
+		}catch(e){}
 		$('#pageDescription').html(description);
 		if(localStorage.getItem('level')=='01'){
 			buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:0};
@@ -63,14 +69,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		}else if(localStorage.getItem('level')=='04_02'){
 			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='04_03'){
-			try{
-				var filesFS=JSON.parse(localStorage.getItem('filesFS'));
-				filesFS.forEach(function(element, index, array) {
-					if(element.params.programName==order.id+'_'+localStorage.getItem('level')+'_'+user.name+'_'+order.pointsNum){
-						$('#pageDescriptionQuestion').html().replace('[foto]','<img src="'+element.params.path+'">');
-					}
-				});
-			}catch(e){}
 			buttons={takePhoto:0,answerYes:1,answerNo:0,stopTaskNo:1,unexpectedCase:0,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='04_05'){
 			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
@@ -94,6 +92,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	function takePhoto16() {
 		localStorage.setItem('lastLevel',localStorage.getItem('level'));
+		localStorage.setItem('oldLevel',localStorage.getItem('level'));
 		localStorage.setItem('level','16');
 	 	try{
 			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
@@ -128,9 +127,11 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	function actYes(){
 		if(localStorage.getItem('level')=='00_01'){
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','02');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_01'){
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','04_02');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_02' || localStorage.getItem('level')=='07_01' || localStorage.getItem('level')=='04_05'){
@@ -139,18 +140,22 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			order.pointsNum=order.points.length;
 			localStorage.setItem('order',JSON.stringify(order));
 			app.closeOrder('play');
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','00_01');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_03'){
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','04_04');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}
 	}
 	function actNo(){
 		if(localStorage.getItem('level')=='00_01'){
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','07');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_02' || localStorage.getItem('level')=='07_01'){
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','04_03');
 			var temp=false;
 			order.points.forEach(function(element, index, array){
@@ -163,6 +168,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			});
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_01'){
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','10');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_05'){
@@ -198,6 +204,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 		console.log('level:04_04 point:'+order.pointsNum+' act:done');
 			order.points[order.pointsNum-1]='done';
 			localStorage.setItem('order',JSON.stringify(order));
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 	 		localStorage.setItem('level','10');
 	 		app.mainView.loadPage('photo.html');
 	 	}
@@ -217,9 +224,11 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			}
 		});
 		if(temp==true){
+			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','04_03');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 	 	}else{
+	 		localStorage.setItem('oldLevel',localStorage.getItem('level'));
 	 		localStorage.setItem('level','04_05');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 	 	}
