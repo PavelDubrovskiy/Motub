@@ -16,23 +16,47 @@
 
 	<!-- СТРАНИЦА -->
 	<div data-page="takePhoto" class="page">
-		<div class="page-content flex-container">
-		
+		<div class="page-content flex-container" id="takePhotoPage">
 			<div class="flex-block-fix f_medium f_center" id="pageDescription"></div>
 			
-			<a id="takePhoto" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
-				<i class="icon icon-camera"></i><span>Сфотографи&shy;ровать</span>
-			</a>
-			<a id="unexpectedCase" href="#" class="flex-block m_size-8 button button-fill button-red f_big m_margin">
-				<i class="icon icon-alert-circled"></i><span>Нештатная ситуация</span>
-			</a>
-			<a id="stopTask" href="#" class="flex-block m_size-8 button button-fill button-gray f_big m_margin">
-				<i class="icon icon-android-data"></i><span>Отложить задачу</span>
-			</a>
-			<a id="noDamage" href="#" class="flex-block m_size-8 button button-fill button-green f_big m_margin st_hidden">
-				<i class="icon icon-checkmark-round"></i><span>Повреждений нет</span>
-			</a>
-		</div>				
+		</div>
+		<script id="takePhotoTemplate" type="text/template7">
+			{{#if buttons.takePhoto}}
+				<a id="takePhoto" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
+					<i class="icon icon-camera"></i><span>Сфотографи&shy;ровать</span>
+				</a>
+			{{/if}}
+			{{#if buttons.answerYes}}
+				<a id="answerYes" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
+					<i class="icon icon-checkmark-round"></i><span>Да</span>
+				</a>
+			{{/if}}
+			{{#if buttons.answerNo}}
+				<a id="answerNo" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
+					<i class="icon icon-close-round"></i><span>Нет</span>
+				</a>
+			{{/if}}
+			{{#if buttons.stopTaskNo}}
+				<a id="stopTaskNo" href="#" class="flex-block m_size-8 button button-fill f_big m_margin">
+					<i class="icon icon-close-round"></i><span>Нет, отложить задачу</span>
+				</a>
+			{{/if}}
+			{{#if buttons.unexpectedCase}}
+				<a id="unexpectedCase" href="#" class="flex-block m_size-8 button button-fill button-red f_big m_margin">
+					<i class="icon icon-alert-circled"></i><span>Нештатная ситуация</span>
+				</a>
+			{{/if}}
+			{{#if buttons.stopTask}}
+				<a id="stopTask" href="#" class="flex-block m_size-8 button button-fill button-gray f_big m_margin">
+					<i class="icon icon-android-data"></i><span>Отложить задачу</span>
+				</a>
+			{{/if}}
+			{{#if buttons.noDamage}}
+				<a id="noDamage" href="#" class="flex-block m_size-8 button button-fill button-green f_big m_margin">
+					<i class="icon icon-checkmark-round"></i><span>Повреждений нет</span>
+				</a>
+			{{/if}}
+		</script>	
 	</div>
 	<!-- /СТРАНИЦА -->
 	

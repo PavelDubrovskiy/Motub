@@ -65,7 +65,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='04'){
 	 		localStorage.setItem('level','04_01');
-	 		app.mainView.loadPage('question.html');
+	 		app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='05'){
 	 		localStorage.setItem('level','06');
 	 		app.mainView.loadPage('takePhoto.html');
@@ -74,7 +74,13 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
  			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='07'){
 	 		localStorage.setItem('level','07_01');
-	 		app.mainView.loadPage('question.html');
+	 		app.mainView.loadPage('takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='08'){
+	 		localStorage.setItem('level','09');
+	 		app.mainView.loadPage('takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='09'){
+	 		app.closeOrder('done');
+ 			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='10'){
 	 		localStorage.setItem('level','04_03');
 	 		var temp=false;
@@ -88,7 +94,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 			console.log(order);
 			if(temp==true){
 				localStorage.setItem('order',JSON.stringify(order));
-		 		app.mainView.loadPage('question.html');
+		 		app.mainView.loadPage('takePhoto.html');
 		 	}else{
 		 		app.closeOrder('done');
 		 		app.mainView.loadPage('success.html');

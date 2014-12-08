@@ -42,9 +42,11 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 		if(user.igroup.path=='mon' && order.status=='new') {
 			localStorage.setItem('level','01');
 			app.mainView.loadPage('takePhoto.html');
-		}else if(user.igroup.path=='fas' && (order.status=='new' || order.status=='play')){
+		}else if(user.igroup.path=='fas'){
 			if(order.status=='new' || order.status=='play'){
 				localStorage.setItem('level','00_01');
+			}else if(order.status=='remark'){
+				localStorage.setItem('level','08');
 			}
 			if(order.points=='""'){
 				order.points=['play'];
@@ -59,16 +61,8 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 				});
 			}
 			localStorage.setItem('order',JSON.stringify(order));
-			app.mainView.loadPage('question.html');
-		}else if(user.igroup.path=='mon'){
-			app.mainView.loadPage('takePhoto.html');
-		}else if(user.igroup.path=='fas'){
-			if(localStorage.getItem('level')=='00_01'){
-				app.mainView.loadPage('question.html');
-			}else if(localStorage.getItem('level')=='10'){
-				app.mainView.loadPage('takePhoto.html');
-			}
 		}
+		app.mainView.loadPage('takePhoto.html');
 	}
 	
 	return {
