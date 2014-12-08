@@ -56,7 +56,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 				console.log(filesFS[i].params.programName+" == "+order.id+'_04_'+user.name+'_'+order.pointsNum);
 				if(filesFS[i].params.programName == order.id+'_04_'+user.name+'_'+order.pointsNum){
 					console.log('filesFS try to replace');
-					description=description.replace('photo','<img src="'+filesFS[i].params.path+'">');
+					description=description.replace('photo','<img src="'+filesFS[i].params.path+'" style="max-height:65%">');
 				}
 			}
 		}catch(e){}
