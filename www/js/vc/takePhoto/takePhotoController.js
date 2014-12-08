@@ -40,7 +40,28 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	
 	document.addEventListener("backbutton", onBackButtonFire, false); 
 	function onBackButtonFire(){
-		return false;
+		if(localStorage.getItem('level')=='00_01'){
+			localStorage.setItem('level','00');
+	 		app.mainView.loadPage('task.html');
+		}else if(localStorage.getItem('level')=='01'){
+			localStorage.setItem('level','00');
+	 		app.mainView.loadPage('task.html');
+	 	}else if(localStorage.getItem('level')=='02'){
+	 		localStorage.setItem('level','00_01');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}else if(localStorage.getItem('level')=='03'){
+	 		localStorage.setItem('level','01');
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='04'){
+	 		localStorage.setItem('level','02');
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='05'){
+	 		localStorage.setItem('level','03');
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='06'){
+	 		localStorage.setItem('level','05');
+	 		app.mainView.loadPage('photo.html');
+	 	}
 		//localStorage.setItem('level',localStorage.getItem('oldLevel'));
 	}
 	function init(query) {
