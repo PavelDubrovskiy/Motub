@@ -73,6 +73,12 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 	}else if(localStorage.getItem('level')=='07_01'){
 	 		localStorage.setItem('level','07');
 	 		app.mainView.loadPage('photo.html');
+	 	}else if(localStorage.getItem('level')=='08'){
+	 		localStorage.setItem('level','00');
+	 		app.mainView.loadPage('task.html');
+	 	}else if(localStorage.getItem('level')=='09'){
+	 		localStorage.setItem('level','08');
+	 		app.mainView.loadPage('photo.html');
 	 	}
 		//localStorage.setItem('level',localStorage.getItem('oldLevel'));
 	}
