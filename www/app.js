@@ -85,7 +85,11 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		params.status = 'new';
 		var today = new Date();
 		var dateString = today.getFullYear()+'-'+today.getMonth()+'-'+('0'+today.getDate()).slice(-2)+'-'+today.getHours()+today.getMinutes();
-		params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level];
+		if(order.pointsNum){
+			params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level]+'_'+order.pointsNum;
+		}else{
+			params.name = order.fileName+dateString+'_'+user.name+'_'+photoNames['name'+level]+'_'+order.pointsNum;
+		}
 		params.programName = order.id+'_'+level+'_'+user.name+'_'+order.pointsNum;
 		options.params = params;
 		var ft = new FileTransfer();
@@ -100,8 +104,10 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			filesFS.forEach(function(element, index, array) {
 				var path=element.params.path;
 				var options=element.options;
-				var ft = new FileTransfer();
-				ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
+				if(options.params.status=='new'){
+					var ft = new FileTransfer();
+					ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
+				}
 			});
 		}
 	};

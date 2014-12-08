@@ -96,8 +96,8 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 				localStorage.setItem('order',JSON.stringify(order));
 		 		app.mainView.loadPage('takePhoto.html');
 		 	}else{
-		 		app.closeOrder('done');
-		 		app.mainView.loadPage('success.html');
+		 		localStorage.setItem('level','04_05');
+	 			app.mainView.loadPage('takePhoto.html');
 		 	}
 	 	}else if(localStorage.getItem('level')=='16'){
 	 		app.closeOrder('error');
