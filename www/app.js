@@ -55,13 +55,15 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			if(filesFS[i].params.name==r.response){
 				//delete filesFS[i];
 				 filesFS[i].params.status = 'sent';
-				 $('#'+filesFS[i].params.programName).text('sent');
+				 try{
+				 	$('#'+filesFS[i].params.programName).text('sent');
+				 }catch(e){};
 			}
 		}
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));
-		/*console.log("Code = " + r.responseCode);
-		console.log("Response = " + r.response);
-		console.log("Sent = " + r.bytesSent);*/
+		console.log("upload Code = " + r.responseCode);
+		console.log("upload Response = " + r.response);
+		console.log("upload Sent = " + r.bytesSent);
 	}
 	
 	var fail = function (error) {
@@ -75,10 +77,10 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			}
 		}
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));*/
-		sendFilesFS();
-		/*console.log("An error has occurred: Code = " + error.code);
+		//sendFilesFS();
+		console.log("upload An error has occurred: Code = " + error.code);
 		console.log("upload error source " + error.source);
-		console.log("upload error target " + error.target);*/
+		console.log("upload error target " + error.target);
 	}
 	var sendFile=function(order, path, level){
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
