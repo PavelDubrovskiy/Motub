@@ -64,9 +64,10 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	}
 	
 	var fail = function (error) {
-		console.log("An error has occurred: Code = " + error.code);
+		sendFilesFS();
+		/*console.log("An error has occurred: Code = " + error.code);
 		console.log("upload error source " + error.source);
-		console.log("upload error target " + error.target);
+		console.log("upload error target " + error.target);*/
 	}
 	var sendFile=function(order, path, level){
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
