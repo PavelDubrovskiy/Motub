@@ -19,7 +19,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	function init(query) {
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
 		$('#navigationNameMain').text('Задачи на сегодня');
-		localStorage.removeItem('Orders');
+		var orders=JSON.parse(localStorage.getItem('orders'));
 		$.ajax({
 			type: "POST",
 			async: true,
@@ -31,13 +31,29 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 				}else if(msg==''){
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{
-					orders=JSON.parse(msg);
-					localStorage.setItem('orders',msg);
+					var newOrders=JSON.parse(msg);
+					for(var i in newOrders){
+						if(orders[i]===undefined){
+							orders[i]=newOrders[i];
+						}
+					}
+					for(var i in orders){
+						if(newOrders[i]===undefined){
+							delete orders[i];
+						}
+					}
+					localStorage.setItem('orders',JSON.stringify(orders));
 					view.render({
 						bindings: bindings,
 						orders:orders
 					});
 				}
+			},
+			error: function(msg){
+				view.render({
+					bindings: bindings,
+					orders:orders
+				});
 			}
 		});
 	}

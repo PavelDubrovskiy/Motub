@@ -71,7 +71,8 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 		app.mainView.loadPage('processManager.html');
 	}
 	function exit(){
-		localStorage.clear();
+		//localStorage.clear();
+		localStorage.removeItem('User');
 		navigator.app.exitApp();
 	}
 	return {
