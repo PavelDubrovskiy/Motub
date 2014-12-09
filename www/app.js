@@ -55,6 +55,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			if(filesFS[i].params.name==r.response){
 				//delete filesFS[i];
 				 filesFS[i].params.status = 'sent';
+				 $('#'+filesFS[i].params.programName).text('sent');
 			}
 		}
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));

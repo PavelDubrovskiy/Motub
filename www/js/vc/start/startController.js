@@ -11,7 +11,12 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 			element: '#exit',
 			event: 'click',
 			handler: exit			
-		}
+		},
+		{
+			element: '#processManagerButton',
+			event: 'dblclick',
+			handler: processManagerButton			
+		}		
 	];
 	
 	function init() {
@@ -61,6 +66,9 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 				app.f7.alert('Нет подключения к&nbsp;интернету или&nbsp;сервер не&nbsp;отвечает', "Ошибка!");
 			}
 		});
+	}
+	function processManagerButton(){
+		app.mainView.loadPage('processManager.html');
 	}
 	function exit(){
 		localStorage.clear();
