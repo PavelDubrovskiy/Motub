@@ -268,9 +268,11 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('level','04_03');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 	 	}else{
-	 		localStorage.setItem('oldLevel',localStorage.getItem('level'));
+	 		app.closeOrder('stop');
+	 		app.mainView.loadPage('success.html');
+	 		/*localStorage.setItem('oldLevel',localStorage.getItem('level'));
 	 		localStorage.setItem('level','04_05');
-	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');*/
 	 	}
 	}
 	function noDamage(){
