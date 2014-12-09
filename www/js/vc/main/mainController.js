@@ -19,7 +19,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	function init(query) {
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
 		$('#navigationNameMain').text('Задачи на сегодня');
-		var orders=JSON.parse(localStorage.getItem('orders'));
+		orders=JSON.parse(localStorage.getItem('orders'));
 		$.ajax({
 			type: "POST",
 			async: true,
