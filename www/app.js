@@ -65,6 +65,16 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	}
 	
 	var fail = function (error) {
+		/*var filesFS=JSON.parse(localStorage.getItem('filesFS'));
+		for(var i in filesFS){
+			console.log(filesFS[i].params.name+'=='+r.response);
+			if(filesFS[i].params.name==r.response){
+				//delete filesFS[i];
+				 filesFS[i].params.status = 'sent';
+				 $('#'+filesFS[i].params.programName).text('sent');
+			}
+		}
+		localStorage.setItem('filesFS',JSON.stringify(filesFS));*/
 		sendFilesFS();
 		/*console.log("An error has occurred: Code = " + error.code);
 		console.log("upload error source " + error.source);
@@ -105,7 +115,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		if(filesFS.length>0){
 			filesFS.forEach(function(element, index, array) {
 				var path=element.params.path;
-				var options=element.options;
+				var options=element;
 				if(options.params.status=='new'){
 					var ft = new FileTransfer();
 					ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
