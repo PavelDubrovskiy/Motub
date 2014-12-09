@@ -51,7 +51,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var win = function (r) {
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 		for(var i in filesFS){
-			console.log(filesFS[i].params.name+'=='+r.response);
+			//console.log(filesFS[i].params.name+'=='+r.response);
 			if(filesFS[i].params.name==r.response){
 				//delete filesFS[i];
 				 filesFS[i].params.status = 'sent';
@@ -110,6 +110,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		//console.log(options);
 		filesFS.push(options);
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));
+		console.log('Try to upload:'+options.params.name);
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
 	var sendFilesFS=function(){

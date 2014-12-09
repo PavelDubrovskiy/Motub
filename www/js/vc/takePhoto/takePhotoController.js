@@ -85,16 +85,16 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function init(query) {
 		var buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
 		order=JSON.parse(localStorage.getItem('order'));
-		console.log(order);
+		//console.log(order);
 		//$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
 		$('#navigationName').text('УН: '+order.uid);
 		var description=app.settings.description[localStorage.getItem('level')].replace('№n','№'+order.pointsNum);
 		try{
 			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 			for(var i in filesFS){
-				console.log(filesFS[i].params.programName+" == "+order.id+'_04_'+user.name+'_'+order.pointsNum);
+				//console.log(filesFS[i].params.programName+" == "+order.id+'_04_'+user.name+'_'+order.pointsNum);
 				if(filesFS[i].params.programName == order.id+'_04_'+user.name+'_'+order.pointsNum){
-					console.log('filesFS try to replace');
+					//console.log('filesFS try to replace');
 					description=description.replace('photo','<img src="'+filesFS[i].params.path+'" style="max-height:65%">');
 				}
 			}
@@ -175,7 +175,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('level','04_02');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_02' || localStorage.getItem('level')=='07_01' || localStorage.getItem('level')=='04_05'){
-			console.log('actYes level 04_02 07_01 04_05 select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:add point:'+(order.points.length+1));
+			//console.log('actYes level 04_02 07_01 04_05 select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:add point:'+(order.points.length+1));
 			order.points.push('play');
 			order.pointsNum=order.points.length;
 			localStorage.setItem('order',JSON.stringify(order));
@@ -200,7 +200,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			var temp=false;
 			order.points.forEach(function(element, index, array){
 				if(temp==false && element!='done'){
-					console.log('actNo level 04_02 07_01 select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:select point:'+(index+1));
+					//console.log('actNo level 04_02 07_01 select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:select point:'+(index+1));
 					order.pointsNum=index+1;
 					localStorage.setItem('order',JSON.stringify(order));
 					temp=true;
@@ -241,7 +241,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 	}else if(localStorage.getItem('level')=='16'){
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='04_04'){
-	 		console.log('level:04_04 point:'+order.pointsNum+' act:done');
+	 		//console.log('level:04_04 point:'+order.pointsNum+' act:done');
 			order.points[order.pointsNum-1]='done';
 			localStorage.setItem('order',JSON.stringify(order));
 			localStorage.setItem('oldLevel',localStorage.getItem('level'));
@@ -257,7 +257,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		var temp=false;
 		order.points.forEach(function(element, index, array){
 			if(temp==false && element!='done' && order.pointsNum!=index+1){
-				console.log('stopTaskNo level select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:select point:'+(index+1));
+				//console.log('stopTaskNo level select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:select point:'+(index+1));
 				order.pointsNum=index+1;
 				localStorage.setItem('order',JSON.stringify(order));
 				temp=true;

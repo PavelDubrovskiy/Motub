@@ -79,7 +79,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		app.closeOrder('done');
  			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='07'){
-	 		console.log('level:07 point:'+order.pointsNum+' act:done');
+	 		//console.log('level:07 point:'+order.pointsNum+' act:done');
 			order.points[order.pointsNum-1]='done';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		localStorage.setItem('level','07_01');
@@ -91,13 +91,13 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		app.closeOrder('done');
  			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='10'){
-	 		console.log('level:10 point:'+order.pointsNum+' act:done');
+	 		//console.log('level:10 point:'+order.pointsNum+' act:done');
 			order.points[order.pointsNum-1]='done';
 			localStorage.setItem('order',JSON.stringify(order));
 			var temp=false;
 			order.points.forEach(function(element, index, array){
 				if(temp==false && element!='done'){
-					console.log('level:10 point:'+order.pointsNum+' act:select point:'+(index+1));
+					//console.log('level:10 point:'+order.pointsNum+' act:select point:'+(index+1));
 					order.pointsNum=index+1;
 					localStorage.setItem('order',JSON.stringify(order));
 					temp=true;
