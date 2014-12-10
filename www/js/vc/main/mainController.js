@@ -32,23 +32,20 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{
 					var newOrders=JSON.parse(msg);
-					try{
-						for(var i in newOrders){
-							if(orders.i===undefined){
-								orders.i=newOrders[i];
-							}
+					console.log(newOrders);
+					for(var i in newOrders){
+						if(orders.i===undefined){
+							orders.i=newOrders[i];
 						}
-						for(var i in orders){
-							try{
-								if(newOrders[i]===undefined){
-									delete orders[i];
-								}
-							}catch(e){
+					}
+					for(var i in orders){
+						try{
+							if(newOrders[i]===undefined){
 								delete orders[i];
 							}
+						}catch(e){
+							delete orders[i];
 						}
-					}catch(e){
-						orders=newOrders;
 					}
 					localStorage.setItem('orders',JSON.stringify(orders));
 					view.render({
