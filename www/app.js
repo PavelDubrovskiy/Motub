@@ -113,10 +113,9 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		console.log('Try to upload:'+options.params.name);
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
-	var sendFilesFSInterval=setInterval( 'sendFilesFS' , 1000*60*10);
 	var sendFilesFS=function(){
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
-		if(filesFS.length>0){
+		if(filesFS!==null){
 			filesFS.forEach(function(element, index, array) {
 				var path=element.params.path;
 				var options=element;
@@ -127,6 +126,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			});
 		}
 	};
+	var sendFilesFSInterval=setInterval(sendFilesFS, 1000*60*10);
 	var closeOrder=function(status){
 		var order=JSON.parse(localStorage.getItem('order'));
 		var user=JSON.parse(localStorage.getItem('User'));
