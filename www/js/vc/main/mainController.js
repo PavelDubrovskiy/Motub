@@ -42,9 +42,9 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 						}
 					}
 					for(var i in orders){
-						console.log(newOrders.i);
+						console.log(newOrders[i]);
 						console.log(i);
-						if(newOrders.i===undefined){
+						if(newOrders[i]===undefined){
 							delete orders[i];
 						}
 					}
