@@ -32,8 +32,10 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{
 					var newOrders=JSON.parse(msg);
+					console.log(orders);
 					console.log(newOrders);
 					for(var i in newOrders){
+						console.log(orders.i);
 						if(orders.i===undefined){
 							orders.i=newOrders[i];
 						}
