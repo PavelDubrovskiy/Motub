@@ -32,10 +32,11 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{
 					var newOrders=JSON.parse(msg);
-					console.log('orders:')
+					console.log('orders:');
 					console.log(orders);
-					console.log('newOrders:')
+					console.log('newOrders:');
 					console.log(newOrders);
+					console.log('ADD');
 					for(var i in newOrders){
 						console.log(i);
 						console.log(orders.i);
@@ -45,7 +46,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 					}
 					console.log('orders:');
 					console.log(orders);
-					console.log('next for(var i in orders)')
+					console.log('DELETE');
 					for(var i in orders){
 						console.log(newOrders[i]);
 						console.log(i);
@@ -53,6 +54,8 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 							delete orders[i];
 						}
 					}
+					console.log('orders:');
+					console.log(orders);
 					localStorage.setItem('orders',JSON.stringify(orders));
 					view.render({
 						bindings: bindings,
