@@ -36,16 +36,15 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 					console.log(newOrders);
 					for(var i in newOrders){
 						console.log(orders.i);
+						console.log(i);
 						if(orders.i===undefined){
 							orders.i=newOrders[i];
 						}
 					}
 					for(var i in orders){
-						try{
-							if(newOrders[i]===undefined){
-								delete orders[i];
-							}
-						}catch(e){
+						console.log(newOrders.i);
+						console.log(i);
+						if(newOrders.i===undefined){
 							delete orders[i];
 						}
 					}
