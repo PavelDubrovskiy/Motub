@@ -72,6 +72,8 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 	}
 	function exit(){
 		//localStorage.clear();
+		//app.mainView.loadPage('index.html');
+		//$('#authorizationForm').show();
 		localStorage.removeItem('User');
 		navigator.app.exitApp();
 	}
