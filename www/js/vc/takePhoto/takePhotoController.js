@@ -167,7 +167,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			app.currentFile=mediaFiles[0];
 			alert('next logicController');
 			logicController();
-		catch(e){
+		}catch(e){
 			alert(e);
 		}
 	}
