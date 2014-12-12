@@ -161,11 +161,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	
 	function captureSuccess(mediaFiles){
 		try{
-			alert(mediaFiles[0]);
 			$('#takePhotoPage').hide();
-			alert(app);
 			app.currentFile=mediaFiles[0];
-			alert('next logicController');
 			logicController();
 		}catch(e){
 			alert(e);
@@ -227,6 +224,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	// Управлятор фотками
 	function logicController(){
+		alert(localStorage.getItem('level'));
 		if(localStorage.getItem('level')=='01'){
 			app.mainView.loadPage('photo.html');
 	 	}else if(localStorage.getItem('level')=='02'){

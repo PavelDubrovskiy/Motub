@@ -119,7 +119,9 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var sendFilesFS=function(){
 		var dt = new Date();
 		console.log('sendFilesFS run at '+dt.getHours()+':'+dt.getMinutes());
-		ft.abort();
+		try{
+			ft.abort();
+		}catch(e){}
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 		if(filesFS!==null){
 			filesFS.forEach(function(element, index, array) {
@@ -141,7 +143,9 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		var orders=JSON.parse(localStorage.getItem('orders'));
 		var level=localStorage.getItem('level');
 		var lastLevel=localStorage.getItem('lastLevel');
-		ft.abort();
+		try{
+			ft.abort();
+		}catch(e){}
 		console.log('Try to closeOrder'+order.id+' status '+status);
 		$.ajax({
 			type: "POST",

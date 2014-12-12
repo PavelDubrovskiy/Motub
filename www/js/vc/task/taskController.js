@@ -90,7 +90,9 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	
 	// Переход к началу задания
 	function taskStart() {
-		if(user.igroup.path=='mon' && order.status=='new') {
+		if(user.igroup.path=='mon' && localStorage.getItem('level')=='06_03'){
+			localStorage.setItem('level','06');
+		}else if(user.igroup.path=='mon' && order.status=='new') {
 			localStorage.setItem('level','01');
 			app.mainView.loadPage('takePhoto.html');
 		}else if(user.igroup.path=='fas'){
@@ -98,6 +100,9 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 				localStorage.setItem('level','00_01');
 			}else if(order.status=='remark'){
 				localStorage.setItem('level','08');
+			}
+			if(localStorage.getItem('level')=='06_03'){
+				localStorage.setItem('level','04_05');
 			}
 			if(order.points=='""'){
 				order.points=['play'];
