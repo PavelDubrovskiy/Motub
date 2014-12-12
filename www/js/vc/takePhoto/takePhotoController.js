@@ -127,6 +127,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
 		}catch(e){
+			alert(e);
 			logicController();
 		}
 	}
@@ -159,9 +160,16 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
-		$('#takePhotoPage').hide();
-		app.currentFile=mediaFiles[0];
-		logicController();
+		try{
+			alert(mediaFiles[0]);
+			$('#takePhotoPage').hide();
+			alert(app);
+			app.currentFile=mediaFiles[0];
+			alert('next logicController');
+			logicController();
+		catch(e){
+			alert(e);
+		}
 	}
 	function captureError(error){
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");

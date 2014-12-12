@@ -62,10 +62,11 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 			},
 			error: function(msg){
 				app.f7.alert('Сервер не отвечает', "Ошибка");
+				/*app.f7.alert('Сервер не отвечает', "Ошибка");
 				view.render({
 					bindings: bindings,
 					orders:orders
-				});
+				});*/
 			}
 		});
 	}
