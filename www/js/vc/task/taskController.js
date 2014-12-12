@@ -38,6 +38,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 			taskPhotoBrowser = app.f7.photoBrowser({
 				zoom: true,
 				maxZoom: 3,
+				theme: 'dark',
 				swipeToClose: false,
 				photos: [img],
 				backLinkText: 'Закрыть',
@@ -49,6 +50,10 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 				},
 				onClose: function(pb) {
 					pb.toggleZoom();
+				},
+				onDoubleTap: function() {
+					console.log(taskPhotoBrowser);
+					taskPhotoBrowser.toggleZoom();
 				}
 			});
 		}catch(e){}		

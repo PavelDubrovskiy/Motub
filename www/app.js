@@ -127,6 +127,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 				var options=element;
 				if(options.params.status=='new'){
 					//var ft = new FileTransfer();
+					console.log('Try to upload:'+options.params.name);
 					ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 				}
 			});
