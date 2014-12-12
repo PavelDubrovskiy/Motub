@@ -37,19 +37,18 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 			var img = order.files['00']['path'];
 			taskPhotoBrowser = app.f7.photoBrowser({
 				zoom: true,
+				maxZoom: 3,
 				swipeToClose: false,
 				photos: [img],
 				backLinkText: 'Закрыть',
 				toolbar: false,
 				navbar: false,
 				onOpen: function(pb) {
-					console.log(pb);
 					pb.toggleZoom();
-					
-					$('.photo-browser-slide').on('click', function(){
-						pb.toggleZoom();
-						pb.close();
-					});
+					$('.photo-browser-slide').once('click', pb.close);
+				},
+				onClose: function(pb) {
+					pb.toggleZoom();
 				}
 			});
 		}catch(e){}		
