@@ -134,6 +134,10 @@ body{
 	padding-bottom: 5.5rem;
 }
 
+.toolbar + .page-content.hide-toolbar-on-scroll{
+	padding-bottom: 0;
+}
+
 /* $toolbar */
 .toolbar{
 	height: 5.5rem;
@@ -259,7 +263,12 @@ i.icon.icon-camera{
 	background: #75a800;
 }
 
-
+.toolbar .button-down{
+	width: 100%;
+}
+.button-down .icon-chevron-down{
+	margin: 0;
+}
 
 /* $modal */
 .actions-modal-label{
@@ -483,7 +492,7 @@ img{
 }
 
 .b_task_main-info .item-media .icon{
-	font-size: 3rem;
+	font-size: 2.7rem;
 }
 
 .b_task_main-info .item-media{

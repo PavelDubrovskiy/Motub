@@ -2,6 +2,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	var $ = Framework7.$;
 	var user=new User();
 	var orders='';
+	var clicks=0;
 	var bindings = [
 		{
 			element: '#mainPage',
@@ -13,12 +14,17 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 			element: '#toMain',
 			event: 'click',
 			handler: toMain
+		},
+		{
+			element: '#navigationNameMain',
+			event: 'click',
+			handler: countClick
 		}
+		
 	];
-	
 	function init(query) {
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
-		$('#navigationNameMain').text('Задачи на сегодня');
+		$('#navigationNameMain').text('Бригада '+user.name);
 		orders=JSON.parse(localStorage.getItem('orders'));
 		$.ajax({
 			type: "POST",
@@ -54,6 +60,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 				}
 			},
 			error: function(msg){
+				app.f7.alert('Сервер не отвечает', "Ошибка");
 				view.render({
 					bindings: bindings,
 					orders:orders
@@ -78,6 +85,21 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	function toMain(){
 		localStorage.setItem('level','00');
 		app.mainView.loadPage('reloadPage.html?path=main.html');
+	}
+	function countClick(){
+		clicks++;
+		if(clicks>4){
+			app.f7.prompt('Введите код',
+				function(code){
+					if(code=='2159'){
+						clicks=0;
+						app.mainView.loadPage('processManager.html');
+					}else{
+						clicks=0;
+					}
+				}
+			);
+		}
 	}
 	return {
 		init: init

@@ -15,7 +15,9 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		
 		sortable: false,
 		swipeBackPageBoxShadow: false,
-		swipeBackPage: false
+		swipeBackPage: false,
+		
+		showBarsOnPageScrollEnd: false
 	});
 	
 	var mainView = f7.addView('.view-main', {
@@ -46,8 +48,9 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var config={
 		source:'http://test02.one-touch.ru'
 	};
-	
-	
+	try{
+		var ft = new FileTransfer();
+	 }catch(e){};
 	var win = function (r) {
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 		for(var i in filesFS){
@@ -106,7 +109,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		}
 		params.programName = order.id+'_'+level+'_'+user.name+'_'+order.pointsNum;
 		options.params = params;
-		var ft = new FileTransfer();
+		//var ft = new FileTransfer();
 		//console.log(options);
 		filesFS.push(options);
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));
@@ -120,7 +123,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 				var path=element.params.path;
 				var options=element;
 				if(options.params.status=='new'){
-					var ft = new FileTransfer();
+					//var ft = new FileTransfer();
 					ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 				}
 			});
@@ -133,21 +136,23 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		var orders=JSON.parse(localStorage.getItem('orders'));
 		var level=localStorage.getItem('level');
 		var lastLevel=localStorage.getItem('lastLevel');
-		order.status=status;
-		order.level=level;
-		if(lastLevel){
-			order.level=lastLevel;
-		}
-		orders[order.id]=order;
-		localStorage.setItem('order',JSON.stringify(order));
-		localStorage.setItem('orders',JSON.stringify(orders));
 		$.ajax({
 			type: "POST",
 			async: true,
 			url: config.source+"/api/closeOrder/",
 			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel+'&points='+JSON.stringify(order.points),
 			success: function(msg){
-
+				order.status=status;
+				order.level=level;
+				if(lastLevel){
+					order.level=lastLevel;
+				}
+				orders[order.id]=order;
+				localStorage.setItem('order',JSON.stringify(order));
+				localStorage.setItem('orders',JSON.stringify(orders));
+			},
+			error: function(msg){
+				closeOrder(status);
 			}
 		});
 	}

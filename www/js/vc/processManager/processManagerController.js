@@ -7,6 +7,16 @@ define(["app","js/vc/processManager/processManagerView", "js/utils/user"], funct
 			element: '#tryUpload',
 			event: 'click',
 			handler: tryUpload
+		},
+		{
+			element: '#clearUser',
+			event: 'click',
+			handler: clearUser
+		},
+		{
+			element: '#clearAll',
+			event: 'click',
+			handler: clearAll
 		}
 	];
 	function init(query) {
@@ -17,6 +27,16 @@ define(["app","js/vc/processManager/processManagerView", "js/utils/user"], funct
 	}
 	function tryUpload(){
 		app.sendFilesFS();
+	}
+	function clearUser(){
+		localStorage.removeItem('User');
+		history.pushState(null, null, "index.html");
+		location.reload(); 
+	}
+	function clearAll(){
+		localStorage.clear();
+		history.pushState(null, null, "index.html");
+		location.reload(); 
 	}
 	return {
 		init: init

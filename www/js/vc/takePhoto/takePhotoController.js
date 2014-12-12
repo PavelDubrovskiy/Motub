@@ -103,13 +103,13 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		if(localStorage.getItem('level')=='01'){
 			buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='06'){
-			buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:0,stopTask:0,noDamage:1};
+			buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:1};
 		}else if(localStorage.getItem('level')=='04_01'){
-			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:0,stopTask:0,noDamage:0};
+			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='04_02'){
 			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='04_03'){
-			buttons={takePhoto:0,answerYes:1,answerNo:0,stopTaskNo:1,unexpectedCase:0,stopTask:0,noDamage:0};
+			buttons={takePhoto:0,answerYes:1,answerNo:0,stopTaskNo:1,unexpectedCase:1,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='04_05'){
 			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
 		}else if(localStorage.getItem('level')=='00_01' || localStorage.getItem('level')=='07_01'){
@@ -159,6 +159,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	
 	function captureSuccess(mediaFiles){
+		$('#takePhotoPage').hide();
 		app.currentFile=mediaFiles[0];
 		logicController();
 	}
