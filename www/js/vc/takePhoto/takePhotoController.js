@@ -109,7 +109,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		}else if(localStorage.getItem('level')=='04_02'){
 			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:1,stopTask:0,noDamage:0};
 		}else if(localStorage.getItem('level')=='04_03'){
-			buttons={takePhoto:0,answerYes:1,answerNo:0,stopTaskNo:1,unexpectedCase:1,stopTask:0,noDamage:0};
+			buttons={takePhoto:0,answerYes:1,answerNo:0,stopTaskNo:1,unexpectedCase:1,stopTask:1,noDamage:0};
 		}else if(localStorage.getItem('level')=='04_05'){
 			buttons={takePhoto:0,answerYes:1,answerNo:1,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
 		}else if(localStorage.getItem('level')=='00_01' || localStorage.getItem('level')=='07_01'){

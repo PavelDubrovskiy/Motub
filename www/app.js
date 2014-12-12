@@ -117,6 +117,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
 	var sendFilesFS=function(){
+		ft.abort();
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 		if(filesFS!==null){
 			filesFS.forEach(function(element, index, array) {
@@ -129,13 +130,14 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			});
 		}
 	};
-	var sendFilesFSInterval=setInterval(sendFilesFS, 1000*60*10);
+	var sendFilesFSInterval=setInterval(sendFilesFS, 1000*60*3);
 	var closeOrder=function(status){
 		var order=JSON.parse(localStorage.getItem('order'));
 		var user=JSON.parse(localStorage.getItem('User'));
 		var orders=JSON.parse(localStorage.getItem('orders'));
 		var level=localStorage.getItem('level');
 		var lastLevel=localStorage.getItem('lastLevel');
+		ft.abort();
 		$.ajax({
 			type: "POST",
 			async: true,
