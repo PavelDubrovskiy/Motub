@@ -129,10 +129,9 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			  destinationType : Camera.DestinationType.FILE_URI,
 			  sourceType : Camera.PictureSourceType.CAMERA,
 			  allowEdit : false,
-			  encodingType: Camera.EncodingType.JPEG,
-			  targetWidth: 1600,
-			  targetHeight: 1200,
-			  popoverOptions: CameraPopoverOptions,
+			  //encodingType: Camera.EncodingType.JPEG,
+			  //targetWidth: 1600,
+			  //targetHeight: 1200,
 			  saveToPhotoAlbum: true 
 			};
 			navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
@@ -190,10 +189,12 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			alert(e);
 		}
 	}
-	function cameraError(error){
+	function cameraError(message){
+		alert('Failed because: ' + message);
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function captureError(error){
+		alert(error);
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function actYes(){
