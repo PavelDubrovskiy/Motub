@@ -23,7 +23,11 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 		$('#navigationNamePhoto').text('УН: '+order.uid);
 		$('#pageDescriptionPhoto').text(app.photoNames['name'+localStorage.getItem('level')]);
 		try{
-			path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
+			if(app.currentFile.fullPath.substr(0,8)!='file:///'){
+				path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
+			}else{
+				path=app.currentFile.fullPath;
+			}
 			$('#beforeImg').attr('src',path);
 		}catch(e){}
 		view.render({

@@ -174,7 +174,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		try{
 			alert(fileURI);
 			$('#takePhotoPage').hide();
-			app.currentFile=fileURI;
+			app.currentFile={fullPath: fileURI};
 			logicController();
 		}catch(e){
 			alert(e);
