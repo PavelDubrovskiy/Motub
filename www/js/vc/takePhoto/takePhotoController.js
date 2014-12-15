@@ -125,10 +125,12 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function takePhoto() {
 	 	try{
 			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
-			var cameraOptions={ quality : 90,
+			var cameraOptions={ 
+				//quality : 90,
 			  destinationType : Camera.DestinationType.FILE_URI,
-			  sourceType : Camera.PictureSourceType.CAMERA,
+			  sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
 			  allowEdit : false,
+			  mediaType : Camera.MediaType.PICTURE,
 			  //encodingType: Camera.EncodingType.JPEG,
 			  //targetWidth: 1600,
 			  //targetHeight: 1200,
