@@ -124,7 +124,18 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	// Делаем фото
 	function takePhoto() {
 	 	try{
-			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
+			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
+			var cameraOptions={ quality : 90,
+			  destinationType : Camera.DestinationType.FILE_URI,
+			  sourceType : Camera.PictureSourceType.CAMERA,
+			  allowEdit : false,
+			  encodingType: Camera.EncodingType.JPEG,
+			  targetWidth: 1600,
+			  targetHeight: 1200,
+			  popoverOptions: CameraPopoverOptions,
+			  saveToPhotoAlbum: true 
+			};
+			navigator.camera.getPicture( captureSuccess, captureError, cameraOptions );
 			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
 		}catch(e){
 			alert(e);
@@ -158,8 +169,16 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			}
 		]);
 	}
-	
-	function captureSuccess(mediaFiles){
+	function captureSuccess(fileURI){
+		try{
+			$('#takePhotoPage').hide();
+			app.currentFile=fileURI;
+			logicController();
+		}catch(e){
+			alert(e);
+		}
+	}
+	/*function captureSuccess(mediaFiles){
 		try{
 			$('#takePhotoPage').hide();
 			app.currentFile=mediaFiles[0];
@@ -167,7 +186,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		}catch(e){
 			alert(e);
 		}
-	}
+	}*/
 	function captureError(error){
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
