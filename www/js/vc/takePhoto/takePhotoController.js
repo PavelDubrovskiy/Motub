@@ -171,6 +171,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	function captureSuccess(fileURI){
 		try{
+			alert(fileURI);
 			$('#takePhotoPage').hide();
 			app.currentFile=fileURI;
 			logicController();
