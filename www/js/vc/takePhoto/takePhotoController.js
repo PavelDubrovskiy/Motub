@@ -125,19 +125,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function takePhoto() {
 	 	try{
 			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
-			var cameraOptions={ 
-			//quality : 90,
-			  destinationType : Camera.DestinationType.FILE_URI,
-			  sourceType : Camera.PictureSourceType.CAMERA,
-			  allowEdit : false,
-			  mediaType : Camera.MediaType.PICTURE,
-			  //encodingType: Camera.EncodingType.JPEG,
-			  //targetWidth: 1600,
-			  //targetHeight: 1200,
-			  saveToPhotoAlbum: false 
-			};
-			navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
-			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
+			navigator.camera.getPicture(cameraSuccess, cameraError, app.config.cameraOptions);
 		}catch(e){
 			alert(e);
 			logicController();
@@ -148,8 +136,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		localStorage.setItem('oldLevel',localStorage.getItem('level'));
 		localStorage.setItem('level','16');
 	 	try{
-			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
-			//navigator.camera.getPicture(captureSuccess, captureError, {destinationType: Camera.DestinationType.DATA_URL});
+			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
+			navigator.camera.getPicture(cameraSuccess, cameraError, app.config.cameraOptions);
 		}catch(e){
 			logicController();
 		}
@@ -173,30 +161,26 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	
 	function cameraSuccess(fileURI){
 		try{
-			alert(fileURI);
 			$('#takePhotoPage').hide();
 			app.currentFile={fullPath: fileURI};
 			logicController();
 		}catch(e){
-			alert(e);
+			//alert(e);
 		}
 	}
 	function captureSuccess(mediaFiles){
 		try{
-			alert(mediaFiles[0]);
 			$('#takePhotoPage').hide();
 			app.currentFile=mediaFiles[0];
 			logicController();
 		}catch(e){
-			alert(e);
+			//alert(e);
 		}
 	}
 	function cameraError(message){
-		alert('Failed because: ' + message);
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function captureError(error){
-		alert(error);
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function actYes(){

@@ -38,7 +38,8 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	// Делаем фото
 	function takePhoto() {
 	 	try{
-			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
+			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
+			navigator.camera.getPicture(cameraSuccess, cameraError, app.config.cameraOptions);
 		}catch(e){
 			app.mainView.loadPage('photo.html');
 		}
@@ -53,13 +54,15 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 		logicController();
 	}
 	
-	function captureSuccess(mediaFiles){
-		app.currentFile=mediaFiles[0];
-		path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
+	function cameraSuccess(fileURI){
+		//app.currentFile=mediaFiles[0];
+		//path='file:///'+app.currentFile.fullPath.substr(6,app.currentFile.fullPath.length);
+		app.currentFile={fullPath: fileURI};
+		path=fileURI;
 		$('#beforeImg').attr('src',path);
 	}
 	
-	function captureError(error){
+	function cameraError(error){
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function logicController(){

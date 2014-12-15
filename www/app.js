@@ -45,12 +45,25 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		error: 'Нештатная ситуация',
 		done: 'Выполнен'
 	};
-	var config={
-		source:'http://test02.one-touch.ru'
+	try{
+		var config={
+			source:'http://test02.one-touch.ru',
+			cameraOptions:{ 
+			  destinationType : Camera.DestinationType.FILE_URI,
+			  sourceType : Camera.PictureSourceType.CAMERA,
+			  allowEdit : false,
+			  mediaType : Camera.MediaType.PICTURE,
+			  saveToPhotoAlbum: false 
+			}
+		};
+	}catch(e){
+		var config={
+			source:'http://test02.one-touch.ru'
+		};
 	};
 	try{
 		var ft = new FileTransfer();
-	 }catch(e){};
+	}catch(e){};
 	var win = function (r) {
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 		for(var i in filesFS){
