@@ -30,9 +30,12 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 			}
 			$('#beforeImg').attr('src',path);
 		}catch(e){}
+		
 		view.render({
 			bindings: bindings
 		});
+		
+		app.mainView.showToolbar();
 	}
 	
 	// Делаем фото
