@@ -22,6 +22,8 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		}
 		
 	];
+	var mainInterval=setInterval(init, 1000*60*3);
+	
 	function init(query) {
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
 		$('#navigationNameMain').text('Бригада '+user.name);
@@ -71,6 +73,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		});
 	}
 	function setOrder(){
+		clearInterval(mainInterval);
 		var id=$(this).data('id');
 		localStorage.removeItem('order');
 		try{

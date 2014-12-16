@@ -295,7 +295,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 		localStorage.setItem('level','04_05');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');*/
 	 	}else{
-	 		localStorage.setItem('level','00_01');
+	 		localStorage.setItem('level','04_05');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 	 	}
 	}

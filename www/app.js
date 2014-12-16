@@ -53,7 +53,8 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			  sourceType : Camera.PictureSourceType.CAMERA,
 			  allowEdit : false,
 			  mediaType : Camera.MediaType.PICTURE,
-			  saveToPhotoAlbum: false 
+			  saveToPhotoAlbum: false,
+			  correctOrientation : true
 			}
 		};
 	}catch(e){
@@ -148,7 +149,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			});
 		}
 	};
-	var sendFilesFSInterval=setInterval(sendFilesFS, 1000*60*3);
+	var sendFilesFSInterval=setInterval(sendFilesFS, 1000*60*10);
 	
 	var closeOrder=function(status){
 		var order=JSON.parse(localStorage.getItem('order'));
