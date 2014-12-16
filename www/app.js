@@ -133,7 +133,6 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var sendFilesFS=function(){
 		var dt = new Date();
 		console.log('sendFilesFS run at '+dt.getHours()+':'+dt.getMinutes());
-		alert('run upload');
 		try{
 			ft.abort();
 		}catch(e){}
@@ -150,7 +149,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			});
 		}
 	};
-	var sendFilesFSInterval=setInterval(sendFilesFS, 1000*60*10);
+	var sendFilesFSInterval=setInterval(sendFilesFS, 1000*60*5);
 	
 	var closeOrder=function(status){
 		var order=JSON.parse(localStorage.getItem('order'));

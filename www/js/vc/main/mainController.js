@@ -40,9 +40,11 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 					app.f7.alert('Сервер не отвечает', "Ошибка");
 				}else{
 					var newOrders=JSON.parse(msg);
-					/*if(orders!==null){
+					if(orders!==null){
 						for(var i in newOrders){
 							if(orders[i]===undefined){
+								orders[i]=newOrders[i];
+							}else if(orders[i].fdate!=newOrders[i].fdate){
 								orders[i]=newOrders[i];
 							}
 						}
@@ -53,8 +55,8 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 						}
 					}else{
 						orders=newOrders;
-					}*/
-					orders=newOrders;
+					}
+					//orders=newOrders;
 					localStorage.setItem('orders',JSON.stringify(orders));
 					view.render({
 						bindings: bindings,
