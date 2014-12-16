@@ -86,7 +86,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		var buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
 		order=JSON.parse(localStorage.getItem('order'));
 		//console.log(order);
-		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
+		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum+' noDU:'+order.noDU);
 		//$('#navigationName').text('УН: '+order.uid);
 		var description=app.settings.description[localStorage.getItem('level')].replace('№n','№'+order.pointsNum);
 		try{
@@ -128,7 +128,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 			navigator.camera.getPicture(cameraSuccess, cameraError, app.config.cameraOptions);
 		}catch(e){
-			alert(e);
+			//alert(e);
 			logicController();
 		}
 	}

@@ -30,12 +30,9 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 			}
 			$('#beforeImg').attr('src',path);
 		}catch(e){}
-		
 		view.render({
 			bindings: bindings
 		});
-		
-		app.mainView.showToolbar();
 	}
 	
 	// Делаем фото
@@ -102,24 +99,28 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
  			app.mainView.loadPage('success.html');
 	 	}else if(localStorage.getItem('level')=='10'){
 	 		//console.log('level:10 point:'+order.pointsNum+' act:done');
-			order.points[order.pointsNum-1]='done';
+		 	order.points[order.pointsNum-1]='done';
 			localStorage.setItem('order',JSON.stringify(order));
-			var temp=false;
-			order.points.forEach(function(element, index, array){
-				if(temp==false && element!='done'){
-					//console.log('level:10 point:'+order.pointsNum+' act:select point:'+(index+1));
-					order.pointsNum=index+1;
-					localStorage.setItem('order',JSON.stringify(order));
-					temp=true;
-				}
-			});
-			if(temp==true){
-				localStorage.setItem('level','04_03');
+		 	if(order.noDU=='1'){
+		 		var temp=false;
+				order.points.forEach(function(element, index, array){
+					if(temp==false && element!='done'){
+						//console.log('level:10 point:'+order.pointsNum+' act:select point:'+(index+1));
+						order.pointsNum=index+1;
+						localStorage.setItem('order',JSON.stringify(order));
+						temp=true;
+					}
+				});
+				if(temp==true){
+					localStorage.setItem('level','04_03');
+			 	}else{
+			 		app.closeOrder('done');
+	 				app.mainView.loadPage('success.html');
+			 	}
 		 	}else{
-		 		localStorage.setItem('level','04_05');
-	 			
+		 		localStorage.setItem('level','07_01');
+		 		app.mainView.loadPage('takePhoto.html');
 		 	}
-		 	app.mainView.loadPage('takePhoto.html');
 	 	}else if(localStorage.getItem('level')=='16'){
 	 		app.closeOrder('error');
 			app.mainView.loadPage('main.html');
