@@ -123,6 +123,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	
 	// Делаем фото
 	function takePhoto() {
+		$('#takePhotoPage').hide();
 	 	try{
 			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 			navigator.camera.getPicture(cameraSuccess, cameraError, app.config.cameraOptions);
