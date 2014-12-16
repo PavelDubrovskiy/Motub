@@ -19,7 +19,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	}
 	function init(query) {
 		order=JSON.parse(localStorage.getItem('order'));
-		//$('#navigationNamePhoto').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
+		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum+' noDU:'+order.noDU);
 		$('#navigationNamePhoto').text('УН: '+order.uid);
 		$('#pageDescriptionPhoto').text(app.photoNames['name'+localStorage.getItem('level')]);
 		try{
@@ -115,6 +115,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 				});
 				if(temp==true){
 					localStorage.setItem('level','04_03');
+					app.mainView.loadPage('takePhoto.html');
 			 	}else{
 			 		app.closeOrder('done');
 	 				app.mainView.loadPage('success.html');
