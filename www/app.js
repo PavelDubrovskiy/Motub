@@ -133,6 +133,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	var sendFilesFS=function(){
 		var dt = new Date();
 		console.log('sendFilesFS run at '+dt.getHours()+':'+dt.getMinutes());
+		alert('run upload');
 		try{
 			ft.abort();
 		}catch(e){}
