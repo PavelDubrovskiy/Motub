@@ -164,7 +164,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			type: "POST",
 			async: true,
 			url: config.source+"/api/closeOrder/",
-			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel+'&points='+JSON.stringify(order.points),
+			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel+'&points='+JSON.stringify(order.points)+'&noDU='+order.noDU,
 			success: function(msg){
 				order.status=status;
 				order.level=level;

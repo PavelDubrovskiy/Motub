@@ -213,6 +213,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('level','07');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_02' || localStorage.getItem('level')=='07_01'){
+			order.noDU='1';
 			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','04_03');
 			var temp=false;
@@ -220,16 +221,18 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 				if(temp==false && element!='done'){
 					//console.log('actNo level 04_02 07_01 select:'+localStorage.getItem('level')+' point:'+order.pointsNum+' act:select point:'+(index+1));
 					order.pointsNum=index+1;
-					localStorage.setItem('order',JSON.stringify(order));
 					temp=true;
 				}
 			});
+			localStorage.setItem('order',JSON.stringify(order));
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_01'){
 			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','10');
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(localStorage.getItem('level')=='04_05'){
+			order.noDU='1';
+			localStorage.setItem('order',JSON.stringify(order));
 			app.closeOrder('done');
 		 	app.mainView.loadPage('success.html');
 		}
@@ -285,12 +288,15 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('level','04_03');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
-	 	}else{
+	 	}else if(order.noDU=='1'){
 	 		app.closeOrder('stop');
 	 		app.mainView.loadPage('success.html');
 	 		/*localStorage.setItem('oldLevel',localStorage.getItem('level'));
 	 		localStorage.setItem('level','04_05');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');*/
+	 	}else{
+	 		localStorage.setItem('level','00_01');
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 	 	}
 	}
 	function noDamage(){
