@@ -126,8 +126,8 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		//console.log(options);
 		filesFS.push(options);
 		localStorage.setItem('filesFS',JSON.stringify(filesFS));
-		console.log('Try to upload:'+options.params.name);
-		ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
+		//console.log('Try to upload:'+options.params.name);
+		//ft.upload(path, encodeURI(config.source+"/api/upload/"), win, fail, options);
 	};
 	var sendFilesFS=function(){
 		var dt = new Date();

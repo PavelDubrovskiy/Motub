@@ -86,8 +86,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		var buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
 		order=JSON.parse(localStorage.getItem('order'));
 		//console.log(order);
-		//$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
-		$('#navigationName').text('УН: '+order.uid);
+		$('#navigationName').text('УН: '+order.uid+' level:'+localStorage.getItem('level')+' num:'+order.pointsNum);
+		//$('#navigationName').text('УН: '+order.uid);
 		var description=app.settings.description[localStorage.getItem('level')].replace('№n','№'+order.pointsNum);
 		try{
 			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
@@ -135,6 +135,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		localStorage.setItem('lastLevel',localStorage.getItem('level'));
 		localStorage.setItem('oldLevel',localStorage.getItem('level'));
 		localStorage.setItem('level','16');
+		$('#takePhotoPage').hide();
 	 	try{
 			//navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
 			navigator.camera.getPicture(cameraSuccess, cameraError, app.config.cameraOptions);
@@ -161,7 +162,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	
 	function cameraSuccess(fileURI){
 		try{
-			$('#takePhotoPage').hide();
 			app.currentFile={fullPath: fileURI};
 			logicController();
 		}catch(e){
@@ -170,7 +170,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	function captureSuccess(mediaFiles){
 		try{
-			$('#takePhotoPage').hide();
 			app.currentFile=mediaFiles[0];
 			logicController();
 		}catch(e){
@@ -178,6 +177,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		}
 	}
 	function cameraError(message){
+		$('#takePhotoPage').show();
 		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
 	}
 	function captureError(error){
