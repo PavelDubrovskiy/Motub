@@ -98,10 +98,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 			localStorage.setItem('order',JSON.stringify(order));
 			app.mainView.loadPage('takePhoto.html');
 		}else if(user.igroup.path=='fas'){
-			if(order.status=='new' || order.status=='play'){
-				order.level='00_01';
-				localStorage.setItem('order',JSON.stringify(order));
-			}else if(order.status=='remark'){
+			if(order.status=='remark' && order.level=='00_01'){
 				order.level='08';
 				localStorage.setItem('order',JSON.stringify(order));
 			}
