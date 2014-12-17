@@ -33,8 +33,9 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		$('#navigationNameMain').text('Бригада '+user.name);
 		orders=JSON.parse(localStorage.getItem('orders'));
 		order=JSON.parse(localStorage.getItem('order'));
+		console.log(order);
 		try{
-			orders[id]=order;
+			orders[order.id*1]=order;
 		}catch(e){};
 		$.ajax({
 			type: "POST",
@@ -65,6 +66,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 						orders=newOrders;
 					}
 					//orders=newOrders;
+					console.log(orders);
 					localStorage.setItem('orders',JSON.stringify(orders));
 					view.render({
 						bindings: bindings,

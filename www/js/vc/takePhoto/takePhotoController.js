@@ -200,7 +200,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function actYes(){
 		if(order.level=='00_01'){
 			localStorage.setItem('oldLevel',order.level);
-			order.level='02;
+			order.level='02';
 			localStorage.setItem('order',JSON.stringify(order));
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(order.level=='04_01'){
@@ -217,6 +217,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('oldLevel',order.level);
 			order.level='00_01';
 			localStorage.setItem('order',JSON.stringify(order));
+			alert(order.level);
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(order.level=='04_03'){
 			localStorage.setItem('oldLevel',order.level);
