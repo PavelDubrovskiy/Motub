@@ -464,6 +464,12 @@ i.icon.icon-camera{
 /* $b_content-block */
 .b_content-block{
 	margin: 1.375rem 0;
+	position: relative;
+}
+
+.b_content-block img{
+	position: relative;
+	z-index: 2;
 }
 
 .b_content-block.m_padding{

@@ -1,13 +1,7 @@
 define(["app","js/vc/success/successView"], function(app, view) {
 	var $ = Framework7.$;
 	var order, orders;
-	var bindings = [
-		{
-			element: '.unexpectedCase',
-			event: 'click',
-			handler: unexpectedCase
-		}
-	];
+	var bindings = [];
 	document.addEventListener("backbutton", onBackButtonFire, false); 
 	function onBackButtonFire(){
 		return false;
@@ -25,12 +19,11 @@ define(["app","js/vc/success/successView"], function(app, view) {
 				next=orders[i].id;
 			}
 		}
-		$('#unexpectedCase').hide();
 		if(next!=0){
 			localStorage.setItem('currentOrder',next);
 			localStorage.setItem('order',JSON.stringify(orders[next]));
 			localStorage.setItem('oldLevel',localStorage.getItem('level'));
-			localStorage.setItem('level','06_01');
+			localStorage.setItem('showLevel','06_01');
 			$('#pageDescriptionSuccess').html(app.settings.description['06_01']);
 			$('#successSubmit').click(function(){app.mainView.loadPage('task.html');});
 			$('#successSubmitText').text('Перейти к заданию');
@@ -41,14 +34,14 @@ define(["app","js/vc/success/successView"], function(app, view) {
 				}
 			}
 			if(remark==true){
-				localStorage.setItem('oldLevel',localStorage.getItem('level'));
-				localStorage.setItem('level','06_02');
+				localStorage.setItem('oldLevel',order.level));
+				localStorage.setItem('showLevel','06_02');
 				$('#pageDescriptionSuccess').html(app.settings.description['06_02']);
 				$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
 				$('#successSubmitText').text('Перейти к задачам');
 			}else{
-				localStorage.setItem('oldLevel',localStorage.getItem('level'));
-				localStorage.setItem('level','06_03');
+				localStorage.setItem('oldLevel',order.level);
+				localStorage.setItem('showLevel','06_03');
 				$('#pageDescriptionSuccess').html(app.settings.description['06_03']);
 				$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
 				$('#successSubmitText').text('Перейти к списку задач');
@@ -57,47 +50,7 @@ define(["app","js/vc/success/successView"], function(app, view) {
 		view.render({
 			bindings: bindings
 		});
-	}
-	
-	// Делаем фото
-	function takePhoto() {
-	 	try{
-			navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
-		}catch(e){
-			app.mainView.loadPage('photo.html');
-		}
-	}
-	
-	// Нештатная ситуация
-	function unexpectedCase() {
-		app.f7.actions([
-			{
-				text: 'Сделайте фотографию нештатной ситуации.',
-				label: true
-			},
-			{
-				text: 'Сделать снимок',
-				onClick: takePhoto16
-			},
-			{
-				text: 'Отмена'
-			}
-		]);
-	}
-	
-	function captureSuccess(mediaFiles){
-		currentFile=mediaFiles[0];
-		var path='file:///'+currentFile.fullPath.substr(6,currentFile.fullPath.length);
-		app.sendFile(order, path, localStorage.getItem('level'));
-	}
-	
-	function captureError(error){
-		app.f7.alert('Сфотографируйте еще раз', "Ошибка");
-	}
-	return {
-		init: init
-	};
-	
+	}	
 	return {
 		init: init
 	};

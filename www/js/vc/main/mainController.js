@@ -32,6 +32,10 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
 		$('#navigationNameMain').text('Бригада '+user.name);
 		orders=JSON.parse(localStorage.getItem('orders'));
+		order=JSON.parse(localStorage.getItem('order'));
+		try{
+			orders[id]=order;
+		}catch(e){};
 		$.ajax({
 			type: "POST",
 			async: true,
@@ -88,13 +92,13 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		orders[id].pointsNum=0;
 		localStorage.setItem('order',JSON.stringify(orders[id]));
 		localStorage.setItem('currentOrder',id);
-		if(orders[id].status!='new' && orders[id].status!='remark'){
+		/*if(orders[id].status!='new' && orders[id].status!='remark'){
 			localStorage.setItem('level',orders[id].level);
-		}
+		}*/
 		app.mainView.loadPage('task.html');
 	}
 	function toMain(){
-		localStorage.setItem('level','00');
+		//localStorage.setItem('level','00');
 		app.mainView.loadPage('reloadPage.html?path=main.html');
 	}
 	function countClick(){

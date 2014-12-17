@@ -90,19 +90,24 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 	
 	// Переход к началу задания
 	function taskStart() {
-		if(user.igroup.path=='mon' && localStorage.getItem('level')=='06_03'){
-			localStorage.setItem('level','06');
+		if(user.igroup.path=='mon' && order.level=='06_03'){
+			order.level='06';
+			localStorage.setItem('order',JSON.stringify(order));
 		}else if(user.igroup.path=='mon' && order.status=='new') {
-			localStorage.setItem('level','01');
+			order.level='01';
+			localStorage.setItem('order',JSON.stringify(order));
 			app.mainView.loadPage('takePhoto.html');
 		}else if(user.igroup.path=='fas'){
 			if(order.status=='new' || order.status=='play'){
-				localStorage.setItem('level','00_01');
+				order.level='00_01';
+				localStorage.setItem('order',JSON.stringify(order));
 			}else if(order.status=='remark'){
-				localStorage.setItem('level','08');
+				order.level='08';
+				localStorage.setItem('order',JSON.stringify(order));
 			}
 			if(localStorage.getItem('level')=='06_03'){
-				localStorage.setItem('level','04_05');
+				order.level='04_05';
+				localStorage.setItem('order',JSON.stringify(order));
 			}
 			if(order.points=='""'){
 				order.points=['play'];

@@ -4,7 +4,7 @@ define(["app","js/utils/common"], function(app, utils) {
 	var compiledTemplate = Template7.compile(template);
 	function render(params){
 		var orders={nps:[],remark:[]};
-		if(localStorage.getItem('level')=='06_02'){
+		if(localStorage.getItem('showLevel')=='06_02'){
 			for(var i in params.orders){
 				params.orders[i].statusRus=app.statusNames[params.orders[i].status];
 				if(params.orders[i].status=='stop'){
@@ -25,7 +25,7 @@ define(["app","js/utils/common"], function(app, utils) {
 		}
 		html = compiledTemplate(orders);
 		$('#mainPage').html(html);
-		if(localStorage.getItem('level')=='06_02'){
+		if(localStorage.getItem('showLevel')=='06_02'){
 			$('#toMainDiv').removeClass('st_hidden');
 		}
 		utils.bindEvents(params.bindings);

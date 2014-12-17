@@ -154,7 +154,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		var order=JSON.parse(localStorage.getItem('order'));
 		var user=JSON.parse(localStorage.getItem('User'));
 		var orders=JSON.parse(localStorage.getItem('orders'));
-		var level=localStorage.getItem('level');
+		var level=order.level;
 		var lastLevel=localStorage.getItem('lastLevel');
 		try{
 			ft.abort();
