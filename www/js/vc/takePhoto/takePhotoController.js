@@ -100,6 +100,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 		//console.log(order);
 		$('#navigationName').text('УН: '+order.uid+' level:'+order.level+' num:'+order.pointsNum+' noDU:'+order.noDU);
 		//$('#navigationName').text('УН: '+order.uid);
+		console.log(order.level);
+		console.log(app.settings.description);
 		var description=app.settings.description[order.level].replace('№n','№'+order.pointsNum);
 		try{
 			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
