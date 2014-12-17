@@ -22,9 +22,13 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		}
 		
 	];
-	var mainInterval=setInterval(init, 1000*60*3);
+	var mainInterval;
 	
 	function init(query) {
+		try{
+			clearInterval(mainInterval);
+		}catch(e){}
+		mainInterval=setInterval(init, 1000*60*3);
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
 		$('#navigationNameMain').text('Бригада '+user.name);
 		orders=JSON.parse(localStorage.getItem('orders'));

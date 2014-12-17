@@ -6,7 +6,6 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 	/*if(localStorage.getItem('order')==''){
 		localStorage.setItem('level','00');
 	}*/
-	localStorage.setItem('level','00');
 	var f7 = new Framework7({
 		modalTitle: ' ',
 		/*swipePanelThreshold: 50,*/

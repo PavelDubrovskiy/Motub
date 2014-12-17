@@ -1,13 +1,12 @@
-define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, User) {
+define(["app", "js/utils/user"], function(app, User) {
 	var $ = Framework7.$;
-	var bindings = [
-	];
+	
 	function init(query) {
-		window.setTimeout(function(){app.mainView.loadPage(query.path)},1000);
-		view.render({
-			bindings: bindings
+		$(document).once('pageAfterAnimation', function() {
+			app.mainView.loadPage(query.path);
 		});
-	}	
+	}
+	
 	return {
 		init: init
 	};
