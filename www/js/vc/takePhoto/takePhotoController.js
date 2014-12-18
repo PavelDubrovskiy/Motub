@@ -67,6 +67,13 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 		order.level='04_01';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+	 	}else if(order.level=='04_03'){
+	 		order.level=localStorage.getItem('backLevel');
+	 		if(order.level=='04_02' || order.level=='07_01'){
+				order.noDU='0';
+	 		}
+			localStorage.setItem('order',JSON.stringify(order));
+	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 	 	}else if(order.level=='05'){
 	 		order.level='03';
 			localStorage.setItem('order',JSON.stringify(order));
@@ -230,6 +237,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(order.level=='04_02' || order.level=='07_01'){
 			order.noDU='1';
+			localStorage.setItem('backLevel',order.level);
 			localStorage.setItem('oldLevel',order.level);
 			order.level='04_03';
 			localStorage.setItem('order',JSON.stringify(order));

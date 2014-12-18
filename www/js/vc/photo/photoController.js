@@ -120,6 +120,7 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 					}
 				});
 				if(temp==true){
+					localStorage.setItem('backLevel',order.level);
 					order.level='04_03';
 					localStorage.setItem('order',JSON.stringify(order));
 					app.mainView.loadPage('takePhoto.html');
