@@ -21,7 +21,7 @@ define(["app","js/vc/success/successView"], function(app, view) {
 		}
 		if(next!=0){
 			localStorage.setItem('currentOrder',next);
-			localStorage.setItem('order',JSON.stringify(orders[next]));
+			localStorage.setItem('order',JSON.stringify(orders['id'+next]));
 			localStorage.setItem('oldLevel',localStorage.getItem('level'));
 			localStorage.setItem('showLevel','06_01');
 			$('#pageDescriptionSuccess').html(app.settings.description['06_01']);

@@ -1,7 +1,7 @@
 define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User) {
 	var $ = Framework7.$;
 	var user=new User();
-	var orders='';
+	var orders={};
 	var clicks=0;
 	var bindings = [
 		{
@@ -22,21 +22,21 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		}
 		
 	];
-	var mainInterval;
+	var mainInterval=setInterval(init, 1000*60*3);
 	
 	function init(query) {
 		try{
 			clearInterval(mainInterval);
 		}catch(e){}
-		mainInterval=setInterval(init, 1000*60*3);
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
 		$('#navigationNameMain').text('Бригада '+user.name);
 		orders=JSON.parse(localStorage.getItem('orders'));
-		order=JSON.parse(localStorage.getItem('order'));
+		var order=JSON.parse(localStorage.getItem('order'));
 		console.log(order);
 		try{
-			orders[order.id*1]=order;
+			orders['id'+order.id]=order;
 		}catch(e){};
+		console.log(orders);
 		$.ajax({
 			type: "POST",
 			async: true,
@@ -65,8 +65,6 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 					}else{
 						orders=newOrders;
 					}
-					//orders=newOrders;
-					console.log(orders);
 					localStorage.setItem('orders',JSON.stringify(orders));
 					view.render({
 						bindings: bindings,
@@ -87,20 +85,13 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 	function setOrder(){
 		clearInterval(mainInterval);
 		var id=$(this).data('id');
-		localStorage.removeItem('order');
 		try{
-			orders[id].points=JSON.parse(JSON.parse(orders[id].points));
+			orders['id'+id].points=JSON.parse(JSON.parse(orders['id'+id].points));
 		}catch(e){}
-		orders[id].pointsNum=0;
-		localStorage.setItem('order',JSON.stringify(orders[id]));
-		localStorage.setItem('currentOrder',id);
-		/*if(orders[id].status!='new' && orders[id].status!='remark'){
-			localStorage.setItem('level',orders[id].level);
-		}*/
+		localStorage.setItem('order',JSON.stringify(orders['id'+id]));
 		app.mainView.loadPage('task.html');
 	}
 	function toMain(){
-		//localStorage.setItem('level','00');
 		app.mainView.loadPage('reloadPage.html?path=main.html');
 	}
 	function countClick(){

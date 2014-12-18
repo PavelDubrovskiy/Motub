@@ -155,6 +155,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		var user=JSON.parse(localStorage.getItem('User'));
 		var orders=JSON.parse(localStorage.getItem('orders'));
 		var level=order.level;
+		var pointsNum=order.pointsNum;
 		var lastLevel=localStorage.getItem('lastLevel');
 		try{
 			ft.abort();
@@ -164,7 +165,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			type: "POST",
 			async: true,
 			url: config.source+"/api/closeOrder/",
-			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel+'&points='+JSON.stringify(order.points)+'&noDU='+order.noDU,
+			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel+'&points='+JSON.stringify(order.points)+'&pointsNum='+pointsNum+'&noDU='+order.noDU,
 			success: function(msg){
 				order.status=status;
 				order.level=level;
