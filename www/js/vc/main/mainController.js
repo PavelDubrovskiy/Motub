@@ -93,6 +93,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		app.mainView.loadPage('task.html');
 	}
 	function toMain(){
+		localStorage.setItem('showLevel','');
 		app.mainView.loadPage('reloadPage.html?path=main.html');
 	}
 	function countClick(){
