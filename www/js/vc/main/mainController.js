@@ -28,6 +28,7 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 		try{
 			clearInterval(mainInterval);
 		}catch(e){}
+		localStorage.setItem('lastLevel','');
 		//$('#navigationNameMain').text('Задачи на сегодня level:'+localStorage.getItem('level'));
 		$('#navigationNameMain').text('Бригада '+user.name);
 		orders=JSON.parse(localStorage.getItem('orders'));

@@ -151,7 +151,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	}
 	function takePhoto16() {
 		localStorage.setItem('lastLevel',order.level);
-		localStorage.setItem('oldLevel',order.level);
 		order.level='16';
 		localStorage.setItem('order',JSON.stringify(order));
 		$('#takePhotoPage').hide();
