@@ -172,7 +172,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 				if(lastLevel){
 					order.level=lastLevel;
 				}
-				orders[order.id]=order;
+				orders['id'+order.id]=order;
 				localStorage.setItem('order',JSON.stringify(order));
 				localStorage.setItem('orders',JSON.stringify(orders));
 				console.log('Order'+order.id+' close success status '+status);

@@ -34,7 +34,7 @@ define(["app","js/vc/success/successView"], function(app, view) {
 				}
 			}
 			if(remark==true){
-				localStorage.setItem('oldLevel',order.level));
+				localStorage.setItem('oldLevel',order.level);
 				localStorage.setItem('showLevel','06_02');
 				$('#pageDescriptionSuccess').html(app.settings.description['06_02']);
 				$('#successSubmit').click(function(){app.mainView.loadPage('main.html');});
