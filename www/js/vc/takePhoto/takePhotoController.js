@@ -84,8 +84,12 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 		order.level='03';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
-	 	}else if(order.level=='06'){
+	 	}else if(order.level=='06' && order.status!='remark'){
 	 		order.level='05';
+			localStorage.setItem('order',JSON.stringify(order));
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(order.level=='06' && order.status=='remark'){
+	 		order.level='11';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(order.level=='07'){
@@ -103,7 +107,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 		order.level='08';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
-	 	}else if(order.level=='11' && order.level=='remark'){
+	 	}else if(order.level=='11' && order.status=='remark'){
 	 		order.level='03';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
@@ -291,6 +295,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 	}else if(order.level=='09'){
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(order.level=='10'){
+	 		app.mainView.loadPage('photo.html');
+	 	}else if(order.level=='11'){
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(order.level=='16'){
 	 		app.mainView.loadPage('photo.html');

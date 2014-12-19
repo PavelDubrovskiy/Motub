@@ -119,6 +119,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 			}
 			localStorage.setItem('order',JSON.stringify(order));
 		}
+		localStorage.setItem('backLevel','');
 		app.mainView.loadPage('takePhoto.html');
 	}
 	
