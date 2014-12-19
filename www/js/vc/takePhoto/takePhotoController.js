@@ -103,6 +103,10 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 		order.level='08';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
+	 	}else if(order.level=='11' && order.level=='remark'){
+	 		order.level='03';
+			localStorage.setItem('order',JSON.stringify(order));
+	 		app.mainView.loadPage('photo.html');
 	 	}
 		//localStorage.setItem('level',localStorage.getItem('oldLevel'));
 	}

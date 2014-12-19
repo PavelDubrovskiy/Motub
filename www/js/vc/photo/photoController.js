@@ -77,8 +77,12 @@ define(["app","js/vc/photo/photoView", "js/utils/user"], function(app, view, Use
 	 		order.level='04';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('takePhoto.html');
-	 	}else if(order.level=='03'){
+	 	}else if(order.level=='03' && order.level!='remark'){
 	 		order.level='05';
+			localStorage.setItem('order',JSON.stringify(order));
+	 		app.mainView.loadPage('takePhoto.html');
+	 	}else if(order.level=='03' && order.level=='remark'){
+	 		order.level='11';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('takePhoto.html');
 	 	}else if(order.level=='04'){

@@ -34,6 +34,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		name08: 'ДО НАЧАЛА РАБОТ',
 		name09: 'РЕЗУЛЬТАТ РАБОТ',
 		name10: 'ФИНАЛ-ФАСАД',
+		name11: 'ИСПРАВЛЕНО-МОНТАЖ',
 		name16: 'СТОП-НЕШТАТНАЯ',
 	};
 	var statusNames={
@@ -160,6 +161,14 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		try{
 			ft.abort();
 		}catch(e){}
+		order.status=status;
+		order.level=level;
+		if(lastLevel){
+			order.level=lastLevel;
+		}
+		orders['id'+order.id]=order;
+		localStorage.setItem('order',JSON.stringify(order));
+		localStorage.setItem('orders',JSON.stringify(orders));
 		console.log('Try to closeOrder'+order.id+' status '+status);
 		$.ajax({
 			type: "POST",
@@ -167,14 +176,6 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 			url: config.source+"/api/closeOrder/",
 			data: 'id='+order.id+'&code='+user.code+'&status='+status+'&level='+level+'&lastLevel='+lastLevel+'&points='+JSON.stringify(order.points)+'&pointsNum='+pointsNum+'&noDU='+order.noDU,
 			success: function(msg){
-				order.status=status;
-				order.level=level;
-				if(lastLevel){
-					order.level=lastLevel;
-				}
-				orders['id'+order.id]=order;
-				localStorage.setItem('order',JSON.stringify(order));
-				localStorage.setItem('orders',JSON.stringify(orders));
 				console.log('Order'+order.id+' close success status '+status);
 			},
 			error: function(e){
