@@ -93,7 +93,7 @@ define(["app","js/vc/task/taskView", "js/utils/user"], function(app, view, User)
 		if(user.igroup.path=='mon' && order.level=='06_03'){
 			order.level='06';
 			localStorage.setItem('order',JSON.stringify(order));
-		}else if(user.igroup.path=='mon' && order.status=='new' && order.level='00_01') {
+		}else if(user.igroup.path=='mon' && order.status=='new' && order.level=='00_01') {
 			order.level='01';
 			localStorage.setItem('order',JSON.stringify(order));
 		}else if(user.igroup.path=='fas'){
