@@ -44,6 +44,9 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 			data: 'code='+user.code,
 			success: function(msg){
 				if(msg=='empty'){
+					view.render({
+						bindings: bindings
+					});
 					$('#mainPage').html('<div class="b_task_none">На&nbsp;сегодня задач&nbsp;нет</div>');
 				}else if(msg==''){
 					app.f7.alert('Сервер не отвечает', "Ошибка");
