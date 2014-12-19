@@ -15,7 +15,7 @@ define(["app","js/vc/success/successView"], function(app, view) {
 		var next=0;
 		var remark=false;
 		for(var i in orders){
-			if(orders[i].address==order.address && orders[i].status=='new'){
+			if(orders[i].address==order.address && orders[i].status=='new' && orders[i].id!=order.id){
 				next=orders[i].id;
 			}
 		}
