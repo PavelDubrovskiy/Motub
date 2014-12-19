@@ -41,7 +41,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	document.addEventListener("backbutton", onBackButtonFire, false); 
 	function onBackButtonFire(){
 		if(order.level=='00_01'){
-			if(ocalStorage.getItem('backLevel')!=''){
+			if(localStorage.getItem('backLevel')!=''){
 				order.level=localStorage.getItem('backLevel');
 				order.points.pop();
 				order.pointsNum=order.points.length;
