@@ -51,7 +51,7 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	 			app.mainView.loadPage('task.html');
 	 		}
 		}else if(order.level=='01'){
-			order.level='00';
+			order.level='01';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('task.html');
 	 	}else if(order.level=='02'){
@@ -101,13 +101,14 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(order.level=='08'){
+	 		order.level='08';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('task.html');
 	 	}else if(order.level=='09'){
 	 		order.level='08';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
-	 	}else if(order.level=='11' && order.status=='remark'){
+	 	}else if(order.level=='11'){
 	 		order.level='03';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
