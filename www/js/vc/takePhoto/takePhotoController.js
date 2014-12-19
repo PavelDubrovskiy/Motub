@@ -41,9 +41,15 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	document.addEventListener("backbutton", onBackButtonFire, false); 
 	function onBackButtonFire(){
 		if(order.level=='00_01'){
-			order.level='00';
-			localStorage.setItem('order',JSON.stringify(order));
-	 		app.mainView.loadPage('task.html');
+			if(ocalStorage.getItem('backLevel')!=''){
+				order.level=localStorage.getItem('backLevel');
+				order.points.pop();
+				order.pointsNum=order.points.length;
+				localStorage.setItem('order',JSON.stringify(order));
+				app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
+			}else{
+	 			app.mainView.loadPage('task.html');
+	 		}
 		}else if(order.level=='01'){
 			order.level='00';
 			localStorage.setItem('order',JSON.stringify(order));
@@ -91,7 +97,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('photo.html');
 	 	}else if(order.level=='08'){
-	 		order.level='00';
 			localStorage.setItem('order',JSON.stringify(order));
 	 		app.mainView.loadPage('task.html');
 	 	}else if(order.level=='09'){
@@ -219,7 +224,6 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 			order.pointsNum=order.points.length;
 			order.level='00_01';
 			localStorage.setItem('order',JSON.stringify(order));
-			app.closeOrder('play');
 	 		app.mainView.loadPage('reloadPage.html?path=takePhoto.html');
 		}else if(order.level=='04_03'){
 			localStorage.setItem('oldLevel',order.level);

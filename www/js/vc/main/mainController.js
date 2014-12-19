@@ -20,7 +20,6 @@ define(["app","js/vc/main/mainView", "js/utils/user"], function(app, view, User)
 			event: 'click',
 			handler: countClick
 		}
-		
 	];
 	var mainInterval=setInterval(init, 1000*60*3);
 	
