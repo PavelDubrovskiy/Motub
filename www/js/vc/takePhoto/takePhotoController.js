@@ -118,7 +118,8 @@ define(["app","js/vc/takePhoto/takePhotoView", "js/utils/user"], function(app, v
 	function init(query) {
 		var buttons={takePhoto:1,answerYes:0,answerNo:0,stopTaskNo:0,unexpectedCase:1,stopTask:1,noDamage:0};
 		order=JSON.parse(localStorage.getItem('order'));
-		$('#navigationName').text('УН: '+order.uid+' level:'+order.level+' num:'+order.pointsNum+' noDU:'+order.noDU);
+		//$('#navigationName').text('УН: '+order.uid+' level:'+order.level+' num:'+order.pointsNum+' noDU:'+order.noDU);
+		$('#navigationName').text('УН: '+order.uid);
 		var description=app.settings.description[order.level].replace('№n','№'+order.pointsNum);
 		try{
 			var filesFS=JSON.parse(localStorage.getItem('filesFS'));
