@@ -6,9 +6,7 @@
 				<i class="icon icon-navicon-round"></i><span></span>
 			</a>
 		</div>
-		<div class="center sliding">
-			Задачи на сегодня
-		</div>
+		<div class="center sliding" id="navigationNameMain"></div>
 		<div class="right sliding">
 		</div>
 	</div>
@@ -26,14 +24,14 @@
 		
 		<!-- ШАБЛОН -->
 		<script id="mainPageTemplate" type="text/template7">
-			<div class="content-block-title">Задачи</div>
+			<div class="content-block-title">Задачи на сегодня</div>
 			<div class="list-block">
 				<ul>
-					{{#each new}}
+					{{#each nps}}
 						<li>
-							<a href="task.html" class="item-content item-link" data-id="{{this.id}}">
+							<a href="#" class="item-content item-link" data-id="{{this.id}}">
 								<div class="item-inner">
-									<div class="item-tx">{{this.address}}</div>
+									<div class="item-tx">{{this.address}} УН:{{this.uid}}</div>
 									<div class="item-after">{{this.statusRus}}</div>
 								</div>
 							</a>
@@ -42,15 +40,15 @@
 				</ul>
 			</div>
 			{{#if remark}}
-				<div class="content-block-title">Замечания</div>
-				<div class="list-block">
+				<div class="content-block-title remarkHide">Замечания</div>
+				<div class="list-block remarkHide">
 					<ul>
 						{{#each remark}}
 							<li>
-								<a href="task.html" class="item-content item-link">
+								<a href="#" class="item-content item-link" data-id="{{this.id}}">
 									<div class="item-inner">
-										<div class="item-tx">{{this.address}}</div>
-										<div class="item-after">Отложена</div>
+										<div class="item-tx">{{this.address}} УН:{{this.uid}}</div>
+										<div class="item-after">{{this.statusRus}}</div>
 									</div>
 								</a>
 							</li>
@@ -58,6 +56,9 @@
 					</ul>
 				</div>
 			{{/if}}
+			<div class="content-block st_hidden" id="toMainDiv">
+				<a href="#" class="button button-fill button-green f_big m_multirow" id="toMain"><span>Замечания и&nbsp;отложенные задачи рядом с&nbsp;этим зданием отсутствуют, перейти к&nbsp;следующей задаче по&nbsp;монтажу</span></a>
+			</div>
 		</script>
 		<!-- /ШАБЛОН -->
 		

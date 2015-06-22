@@ -1,0 +1,60 @@
+<!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="left sliding">
+			<a href="#" class="link icon-only open-panel" data-panel="left">
+				<i class="icon icon-navicon-round"></i><span></span>
+			</a>
+		</div>
+		<div class="center sliding" id="navigationNameProcessManager"></div>
+		<div class="right sliding">
+		</div>
+	</div>
+</div>
+<!-- /НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+
+<!-- СТРАНИЦЫ -->
+<div class="pages navbar-through">
+
+	<!-- СТРАНИЦА -->
+	<div data-page="processManager" class="page">
+		<div class="page-content" id="processManagerPage">
+			<span class="preloader"></span>
+		</div>
+		
+		<!-- ШАБЛОН -->
+		<script id="processManagerPageTemplate" type="text/template7">
+			<div class="content-block">
+				<a href="#" class="button button-fill button-green f_big m_multirow" id="clearUser"><span>Сбросить пользоваетля</span></a>
+			</div>
+			<div class="content-block">
+				<a href="#" class="button button-fill button-green f_big m_multirow" id="clearAll"><span>Сбросить весь кэш</span></a>
+			</div>
+			<div class="content-block-title">Файлы на отправку</div>
+			<div class="list-block">
+				<ul>
+					{{#each files}}
+						<li>
+							<a href="#" class="item-content item-link">
+								<div class="item-inner">
+									<div class="item-tx">
+										{{this.params.name}} <span id="{{this.params.programName}}">{{this.params.status}}</span><br>
+										{{this.params.path}}
+									</div>
+								</div>
+							</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+			<div class="content-block" id="toMainDiv">
+				<a href="#" class="button button-fill button-green f_big m_multirow" id="tryUpload"><span>Отправить еще раз</span></a>
+			</div>
+		</script>
+		<!-- /ШАБЛОН -->
+		
+	</div>
+	<!-- /СТРАНИЦА -->
+	
+</div>
+<!-- /СТРАНИЦЫ -->

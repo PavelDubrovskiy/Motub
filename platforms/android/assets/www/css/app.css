@@ -66,6 +66,7 @@ body{
 
 .panel .list-block .item-media{
 	font-size: 2.3rem;
+	color: #4FC3F7;
 }
 
 /* $content-block */
@@ -101,14 +102,11 @@ body{
 .list-block .item-media{
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
+	color: #03A9F4;
 }
 
 .list-block .item-link .item-inner{
 	background: none;
-}
-
-.list-block .item-media{
-	color: #009688;
 }
 
 .list-block .item-tx{
@@ -134,6 +132,10 @@ body{
 
 .toolbar + .page-content{
 	padding-bottom: 5.5rem;
+}
+
+.toolbar + .page-content.hide-toolbar-on-scroll{
+	padding-bottom: 0;
 }
 
 /* $toolbar */
@@ -169,6 +171,19 @@ body{
 	margin: -1rem 0 0 -1rem;
 }
 
+/* $b_loading */
+.b_loading{
+	font-size: 2rem;
+	color: #999;
+	text-align: center;
+	
+	width: 100%;
+	margin: -5rem 0 0;
+	
+	position: absolute;
+	top: 50%; left: 0;
+}
+
 /* $icons */
 .icon-log-out{
 	position: relative;
@@ -187,12 +202,12 @@ i.icon.icon-camera{
 }
 
 .f_medium{
-	font-size: 1.75rem;
+	font-size: 1.5rem;
 	line-height: 1.125;
 }
 
 .f_big{
-	font-size: 2rem;
+	font-size: 1.85rem;
 	line-height: 1.125;
 }
 
@@ -204,17 +219,18 @@ i.icon.icon-camera{
 .button{
 	border-radius: 1.375rem;
 	height: 5.5rem;
-	line-height: 5.375rem;
+	line-height: 5.2rem;
 }
 
 .button.button-fill{
-	background: #009688;
+	background: #1E88E5;
 }
 
 .button .icon{
 	font-size: 1.5em;
 	margin: 0 0.8rem 0 0;
 }
+	.button .icon-close-round,
 	.button .icon-checkmark-round{
 		font-size: 1.2em;
 	}
@@ -224,35 +240,46 @@ i.icon.icon-camera{
 	vertical-align: middle;
 }
 
-.button.button-gray{
-	border-color: #aaa;
-	color: #999;
+.button.m_multirow{
+	white-space: normal;
+	height: auto;
+	line-height: 1.5;
+	padding: 30px;
 }
-	.button.button-gray.active-state{
-		background: #ddd;
-	}
+
+.button.button-gray,
+.button.button-gray.active-state{
+	background: #bbb;
+	color: #fff;
+}
 
 .button.button-red,
 .button.button-red.active-state{
 	background: #F44336;
 }
 
+.button.button-green,
+.button.button-green.active-state{
+	background: #75a800;
+}
 
+.toolbar .button-down{
+	width: 100%;
+}
+.button-down .icon-chevron-down{
+	margin: 0;
+}
 
 /* $modal */
 .actions-modal-label{
-	font-size: 1.4rem;
+	font-size: 1.8rem;
 	padding: 2rem 10px;
+	color: #333;
 }
 
 .actions-modal-button{
 	line-height: 6rem;
 	font-size: 2rem;
-}
-
-.actions-modal-button,
-.modal-button{
-	color: #00838F;
 }
 
 .modal-button,
@@ -329,14 +356,9 @@ i.icon.icon-camera{
 	}
 	
 	.flex-block-fix{
-		padding: 1.25rem;
+		padding: 1.25rem 15px 2rem;
 		white-space: normal;
 		line-height: 1.2;
-		min-height: 8rem;
-		
-		-ms-flex: 1 0 auto;
-		-webkit-flex: 1 0 auto;
-		flex: 1 0 auto;
 	}
 
 	.flex-block.m_margin{
@@ -354,6 +376,14 @@ i.icon.icon-camera{
 		margin-left: 2%;
 	}
 
+	.flex-block p,
+	.flex-block-fix p{
+		margin: 1rem 0;
+	}
+		.flex-block p:last-child,
+		.flex-block-fix p:last-child{
+			margin: 1rem 0 0;
+		}
 
 
 /* ------- */
@@ -371,6 +401,24 @@ i.icon.icon-camera{
 	color: #333;
 	
 	/*box-shadow: inset 0 0 10rem rgba(0,0,0,.2);*/
+}
+
+.b_logo_box{
+	display: block;
+	border: 0.2rem solid #2196F3;
+	color: #2196F3;
+	background: #fff;
+	padding-right: 0.8rem;
+	border-radius: 0.8rem;
+	position: relative;
+}
+
+.b_logo_box span{
+	background: #2196F3;
+	color: #fff;
+	display: inline-block;
+	padding: 0.8rem 1.1rem 0.8rem 0.8rem;
+	margin: 0 1.1rem 0 0;
 }
 
 .b_logo .icon{
@@ -416,6 +464,12 @@ i.icon.icon-camera{
 /* $b_content-block */
 .b_content-block{
 	margin: 1.375rem 0;
+	position: relative;
+}
+
+.b_content-block img{
+	position: relative;
+	z-index: 2;
 }
 
 .b_content-block.m_padding{
@@ -444,7 +498,7 @@ img{
 }
 
 .b_task_main-info .item-media .icon{
-	font-size: 3rem;
+	font-size: 2.7rem;
 }
 
 .b_task_main-info .item-media{
@@ -455,10 +509,22 @@ img{
 	font-size: 1.6rem;
 }
 
+.b_task_none{
+	font-size: 2rem;
+	padding: 2rem 15px;
+	text-align: center;
+	color: #999;
+}
+
 /* $b_img */
 .b_img{
 	min-height: 2rem;
 	text-align: center;
+}
+
+/* $st_hidden */
+.st_hidden{
+	display: none;
 }
 
 /*.b_img,

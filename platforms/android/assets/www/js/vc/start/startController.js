@@ -11,16 +11,36 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 			element: '#exit',
 			event: 'click',
 			handler: exit			
-		}
+		},
+		{
+			element: '#processManagerButton',
+			event: 'dblclick',
+			handler: processManagerButton			
+		}		
 	];
 	
 	function init() {
-		if(user.id!=''){
-			$('.p_start_buttons').hide();
-			app.mainView.loadPage('main.html');
-		}else{
-			$('#authorizationForm').show();
-		}
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: app.config.source+"/api/getSettings/",
+			success: function(msg){
+				if(msg!=''){
+					app.settings=JSON.parse(msg);
+					if(user.id!=''){
+						$('.p_start_buttons').hide();
+						app.mainView.loadPage('main.html');
+					}else{
+						$('#authorizationForm').show();
+					}
+				}else{
+					app.f7.alert('Нет подключения к&nbsp;интернету или&nbsp;сервер не&nbsp;отвечает', "Ошибка!");
+				}
+			},
+			error: function(error){
+				app.f7.alert('Нет подключения к&nbsp;интернету или&nbsp;сервер не&nbsp;отвечает', "Ошибка!");
+			}
+		});
 		view.render({
 			bindings: bindings
 		});
@@ -34,17 +54,23 @@ define(["app", "js/vc/start/startView", "js/utils/user"], function(app, view, Us
 			url: app.config.source+"/api/login/",
 			data: formInput,
 			success: function(msg){
+				console.log(msg);
 				if(msg!='error'){
 					user.setValues(JSON.parse(msg));
 					app.mainView.loadPage('main.html');
 				}else{
-					app.f7.alert('Неправильно введены логин или пароль', "Ошибка");
+					app.f7.alert('Неправильно введены логин или&nbsp;пароль', "Ошибка!");
 				}
+			},
+			error: function(error){
+				app.f7.alert('Нет подключения к&nbsp;интернету или&nbsp;сервер не&nbsp;отвечает', "Ошибка!");
 			}
 		});
 	}
+	function processManagerButton(){
+		app.mainView.loadPage('processManager.html');
+	}
 	function exit(){
-		localStorage.clear();
 		navigator.app.exitApp();
 	}
 	return {

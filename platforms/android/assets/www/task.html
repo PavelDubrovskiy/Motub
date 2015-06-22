@@ -2,13 +2,11 @@
 <div class="navbar">
 	<div class="navbar-inner">
 		<div class="left sliding">
-			<a href="#" class="link icon-only back">
+			<a href="main.html" class="link icon-only">
 				<i class="icon icon-chevron-left"></i><span>Назад</span>
 			</a>
 		</div>
-		<div class="center sliding">
-			Задача
-		</div>
+		<div class="center sliding"  id="navigationNameTask"></div>
 		<div class="right sliding">
 		</div>
 	</div>
@@ -20,59 +18,73 @@
 
 	<!-- СТРАНИЦА -->
 	<div data-page="task" class="page">
-		<div class="page-content">
-			
-			<!-- ОСНОВНАЯ ИНФОРМАЦИЯ О ЗАДАНИИ -->
-			<div class="list-block b_task_main-info">
-				<ul>
-					<li>
-						<div class="item-content">
-							<div class="item-media"><i class="icon icon-android-location"></i></div>
-							<div class="item-inner" id="taskAddress">
-								
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="item-content">
-							<div class="item-media">УН:</div>
-							<div class="item-inner" id="taskUid">
-								
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<!-- /ОСНОВНАЯ ИНФОРМАЦИЯ О ЗАДАНИИ -->
-			
-			<!-- ЕСЛИ ГОТОВА К ОКРАСКЕ -->
-			<div class="content-block f_center" id="taskInfo">
 
+		<!-- ТУЛБАР -->
+		<div class="toolbar">
+			<div class="toolbar-inner">
+				<a href="#" class="button button-fill button-down button-green f_big">
+					<i class="icon icon-chevron-down"></i>
+				</a>
 			</div>
-			<!-- /ЕСЛИ ГОТОВА К ОКРАСКЕ -->
-			
-			<!-- ФОТО -->
-			<div class="b_content-block">
-				<img src="" alt="" id="taskImg">
-			</div>
-			<!-- /ФОТО -->
-			
-			<!-- ОПИСАНИЕ ЗАДАЧИ -->
-			<div class="content-block-title">Описание задачи</div>
-			<div class="content-block" id="taskDescription">
-			</div>
-			<!-- /ОПИСАНИЕ ЗАДАЧИ -->
-			
-			<!-- СЛЕДУЮЩИЙ ЭТАП -->
-			<div class="content-block">
-				<div class="content-block-inner">
-					<span class="b_task_next" id="taskLevel"></span>
+		</div>
+		<!-- /ТУЛБАР -->
+	
+		<div id="taskCnt" class="page-content hide-toolbar-on-scroll">
+		
+			<div class="scroll-cnt">
+				<!-- ОСНОВНАЯ ИНФОРМАЦИЯ О ЗАДАНИИ -->
+				<div class="list-block b_task_main-info">
+					<ul>
+						<li>
+							<div class="item-content">
+								<div class="item-media"><i class="icon icon-android-location"></i></div>
+								<div class="item-inner" id="taskAddress">
+									
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-media">УН:</div>
+								<div class="item-inner" id="taskUid">
+									
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
-			</div>
-			<!-- /СЛЕДУЮЩИЙ ЭТАП -->
-			
-			<div class="content-block">
-				<a id="taskStart" href="#" class="button button-fill f_big">Приступить к задаче</a>
+				<!-- /ОСНОВНАЯ ИНФОРМАЦИЯ О ЗАДАНИИ -->
+				
+				<!-- ЕСЛИ ГОТОВА К ОКРАСКЕ -->
+				<div class="content-block f_center" id="taskInfo">
+
+				</div>
+				<!-- /ЕСЛИ ГОТОВА К ОКРАСКЕ -->
+				
+				<!-- ФОТО -->
+				<div class="b_content-block">
+					<img src="" alt="" id="taskImg">
+					<span class="preloader"></span>
+				</div>
+				<!-- /ФОТО -->
+				
+				<!-- ОПИСАНИЕ ЗАДАЧИ -->
+				<div class="content-block-title">Описание задачи</div>
+				<div class="content-block" id="taskDescription">
+				</div>
+				<!-- /ОПИСАНИЕ ЗАДАЧИ -->
+				
+				<!-- СЛЕДУЮЩИЙ ЭТАП -->
+				<!--<div class="content-block">
+					<div class="content-block-inner">
+						<span class="b_task_next" id="taskLevel"></span>
+					</div>
+				</div>-->
+				<!-- /СЛЕДУЮЩИЙ ЭТАП -->
+				
+				<div class="content-block">
+					<a id="taskStart" href="#" class="button button-fill f_big">Я на объекте</a>
+				</div>
 			</div>
 			
 		</div>				
