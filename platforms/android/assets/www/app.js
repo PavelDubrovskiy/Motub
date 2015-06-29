@@ -100,6 +100,7 @@ define('app', ['js/router',"js/utils/user"], function(Router, User) {
 		console.log("upload error target " + error.target);
 	}
 	var sendFile=function(order, path, level){
+		var user=JSON.parse(localStorage.getItem('User'));
 		var filesFS=JSON.parse(localStorage.getItem('filesFS'));
 		if(filesFS===null){
 			filesFS=[];

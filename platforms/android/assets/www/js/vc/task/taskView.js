@@ -6,7 +6,9 @@ define(["js/utils/common"], function(utils) {
 		$('#taskInfo').html(params.order.info);
 		try{
 			$('#taskImg').attr('src',params.order.files['00']['path']);
-		}catch(e){}
+		}catch(e){
+			$('.preloader').hide();
+		}
 		$('#taskDescription').html(params.order.description);
 		utils.bindEvents(params.bindings);
 	}
