@@ -5,7 +5,7 @@ define(["js/utils/common"], function(utils) {
 	
 	function render(params) {
 		html = compiledTemplate(params);
-		$('#takePhotoPage').append(html);
+		$('#pageDescription').append(html);
 		utils.bindEvents(params.bindings);
 	}
 	
